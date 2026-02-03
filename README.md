@@ -1,15 +1,18 @@
-```
-    ╔═══════════════════════════════════════════════════════════════╗
-    ║    🔨  W E L C O M E   T O   T H E   W A R   R O O M  🔨      ║
-    ║                                                               ║
-    ║      "We're basically consultants now"  — us, probably        ║
-    ╚═══════════════════════════════════════════════════════════════╝
-```
+<div align="center">
 
-# Home Depot MBA Case Study
+# 🏠 Home Depot MBA Case Study 🔨
 
-> **UGA Terry College Case Competition 2026**
-> "When Digital Capabilities Collide"
+<img src="https://img.shields.io/badge/status-caffeinated-orange?style=for-the-badge" alt="Status: Caffeinated"/>
+<img src="https://img.shields.io/badge/vibes-immaculate-ff6f00?style=for-the-badge" alt="Vibes: Immaculate"/>
+<img src="https://img.shields.io/badge/slides-being%20perfected-ee7125?style=for-the-badge" alt="Slides: Being Perfected"/>
+
+**UGA Terry College Case Competition 2026**
+
+_"When Digital Capabilities Collide"_
+
+✨ _let's get this bread_ ✨
+
+</div>
 
 ---
 
