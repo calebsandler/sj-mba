@@ -1,3 +1,11 @@
+```
+    ╔═══════════════════════════════════════════════════════════════╗
+    ║    🔨  W E L C O M E   T O   T H E   W A R   R O O M  🔨      ║
+    ║                                                               ║
+    ║      "We're basically consultants now"  — us, probably        ║
+    ╚═══════════════════════════════════════════════════════════════╝
+```
+
 # Home Depot MBA Case Study
 
 > **UGA Terry College Case Competition 2026**
@@ -5,7 +13,22 @@
 
 ---
 
-## Getting Started (New Contributors)
+<details>
+<summary>🤫 psst... click for a secret message</summary>
+
+<br>
+
+Hey MY QUEEN! If you're reading this, you're doing amazing. Seriously.
+
+This week is hard, but you've got this. Like fr, I know you can do this despite how have stuff has been recently.
+
+_Now close this and get back to crushing it_ ✨
+
+</details>
+
+---
+
+## Getting Started
 
 ### Prerequisites
 
@@ -51,7 +74,7 @@ gh auth login
 # Choose: GitHub.com → HTTPS → Login with a web browser
 
 # Clone the repo
-gh repo clone YOUR_USERNAME/sj-mba
+gh repo clone calebsandler/sj-mba
 cd sj-mba
 
 # Open in your IDE
