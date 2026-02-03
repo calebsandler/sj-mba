@@ -1,0 +1,2423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>External Data & Research - Home Depot Case Study</title>
+    <style>
+        /* Home Depot FY25 Official Brand Colors */
+        :root {
+            --hd-orange: #F96302;
+            --hd-black: #000000;
+            --hd-white: #FFFFFF;
+            --hd-gray-dark: #747474;
+            --hd-gray-medium: #C4C4C4;
+            --hd-gray-light: #F5F5F5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Helvetica Neue LT Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: var(--hd-white);
+            color: var(--hd-black);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Headlines - Bold, ALL CAPS for major sections */
+        h1 {
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            color: var(--hd-black);
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+            border-bottom: 4px solid var(--hd-orange);
+            font-size: 1.8em;
+        }
+
+        h2 {
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            text-transform: uppercase;
+            color: var(--hd-black);
+            margin: 32px 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--hd-orange);
+            font-size: 1.3em;
+        }
+
+        h3 {
+            font-weight: 700;
+            color: var(--hd-black);
+            margin: 24px 0 12px;
+            font-size: 1.1em;
+        }
+
+        h4 {
+            font-weight: 700;
+            color: var(--hd-black);
+            margin: 16px 0 8px;
+            font-size: 1em;
+        }
+
+        p {
+            color: var(--hd-gray-dark);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        strong {
+            color: var(--hd-black);
+        }
+
+        a {
+            color: var(--hd-orange);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul, ol {
+            margin: 16px 0;
+            padding-left: 24px;
+            color: var(--hd-gray-dark);
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        li::marker {
+            color: var(--hd-orange);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--hd-gray-light);
+            color: var(--hd-black);
+            padding: 48px 32px;
+            margin: -24px -24px 32px -24px;
+            text-align: center;
+            border-bottom: 4px solid var(--hd-orange);
+        }
+
+        .hero h1 {
+            border-bottom: none;
+            font-size: 2em;
+            margin-bottom: 8px;
+            padding-bottom: 0;
+        }
+
+        .hero-subtitle {
+            font-size: 1em;
+            color: var(--hd-gray-dark);
+            margin-bottom: 16px;
+        }
+
+        .hero-date {
+            font-size: 0.85em;
+            color: var(--hd-gray-dark);
+        }
+
+        /* Navigation */
+        .nav {
+            position: sticky;
+            top: 0;
+            background: var(--hd-white);
+            padding: 12px 0;
+            margin-bottom: 24px;
+            z-index: 100;
+            border-bottom: 2px solid var(--hd-gray-medium);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--hd-black);
+            padding: 6px 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8em;
+            letter-spacing: 0.02em;
+            border: 1px solid transparent;
+        }
+
+        .nav-links a:hover {
+            background: var(--hd-orange);
+            color: var(--hd-white);
+            text-decoration: none;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--hd-gray-medium);
+        }
+
+        th {
+            background: var(--hd-black);
+            color: var(--hd-white);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 0.02em;
+        }
+
+        td {
+            color: var(--hd-gray-dark);
+        }
+
+        tr:hover {
+            background: var(--hd-gray-light);
+        }
+
+        /* Code blocks */
+        code {
+            background: var(--hd-gray-light);
+            padding: 2px 6px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.9em;
+            border: 1px solid var(--hd-gray-medium);
+        }
+
+        pre {
+            background: var(--hd-black);
+            color: var(--hd-white);
+            padding: 20px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border-left: 4px solid var(--hd-orange);
+        }
+
+        pre code {
+            background: none;
+            border: none;
+            padding: 0;
+            color: var(--hd-white);
+        }
+
+        /* TL;DR Box */
+        .tldr {
+            background: var(--hd-black);
+            color: var(--hd-white);
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .tldr h3 {
+            color: var(--hd-orange);
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+
+        .tldr p {
+            color: var(--hd-white);
+            margin-bottom: 8px;
+        }
+
+        .tldr strong {
+            color: var(--hd-orange);
+        }
+
+        /* Quote Box */
+        .quote {
+            background: var(--hd-gray-light);
+            border-left: 4px solid var(--hd-orange);
+            padding: 20px 24px;
+            margin: 24px 0;
+            font-style: italic;
+            color: var(--hd-gray-dark);
+        }
+
+        .quote-author {
+            font-style: normal;
+            font-weight: 700;
+            color: var(--hd-black);
+            margin-top: 12px;
+            font-size: 0.9em;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            font-size: 1.15em;
+            text-align: center;
+            padding: 24px;
+            background: var(--hd-gray-light);
+            border-left: 4px solid var(--hd-orange);
+            margin: 24px 0;
+        }
+
+        /* Metrics Display */
+        .metrics {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin: 24px 0;
+        }
+
+        .metric {
+            background: var(--hd-white);
+            padding: 24px 32px;
+            text-align: center;
+            border: 2px solid var(--hd-gray-medium);
+            min-width: 140px;
+            flex: 1;
+        }
+
+        .metric-value {
+            font-size: 2.4em;
+            font-weight: 700;
+            color: var(--hd-orange);
+        }
+
+        .metric-label {
+            font-size: 0.8em;
+            color: var(--hd-gray-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            margin-top: 4px;
+        }
+
+        /* Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .card {
+            background: var(--hd-white);
+            border-left: 4px solid var(--hd-orange);
+            padding: 20px 24px;
+            border-top: 1px solid var(--hd-gray-medium);
+            border-right: 1px solid var(--hd-gray-medium);
+            border-bottom: 1px solid var(--hd-gray-medium);
+        }
+
+        .card h4 {
+            color: var(--hd-black);
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.02em;
+            margin-top: 0;
+        }
+
+        .card p {
+            margin-bottom: 0;
+        }
+
+        .card.problem {
+            border-left-color: var(--hd-black);
+            background: var(--hd-gray-light);
+        }
+
+        .card.solution {
+            border-left-color: var(--hd-orange);
+        }
+
+        /* Flow Diagram */
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 24px;
+            background: var(--hd-gray-light);
+            margin: 24px 0;
+        }
+
+        .flow-box {
+            background: var(--hd-white);
+            border: 2px solid var(--hd-gray-medium);
+            padding: 12px 16px;
+            text-align: center;
+            min-width: 120px;
+            font-size: 0.9em;
+            color: var(--hd-black);
+        }
+
+        .flow-arrow {
+            font-size: 1.5em;
+            color: var(--hd-orange);
+            font-weight: 700;
+        }
+
+        .flow-result {
+            background: var(--hd-black);
+            color: var(--hd-white);
+            border-color: var(--hd-black);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+            margin: 24px 0;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--hd-orange);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 16px 0;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -26px;
+            top: 22px;
+            width: 14px;
+            height: 14px;
+            background: var(--hd-orange);
+        }
+
+        .timeline-item strong {
+            display: block;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.02em;
+            margin-bottom: 4px;
+            color: var(--hd-black);
+        }
+
+        .timeline-item p {
+            margin: 0;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            font-size: 0.8em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .badge-critical {
+            background: var(--hd-orange);
+            color: var(--hd-white);
+        }
+
+        .badge-high {
+            background: var(--hd-black);
+            color: var(--hd-white);
+        }
+
+        .badge-medium {
+            background: var(--hd-gray-light);
+            color: var(--hd-black);
+            border: 1px solid var(--hd-gray-dark);
+        }
+
+        .badge-low {
+            background: var(--hd-gray-light);
+            color: var(--hd-gray-dark);
+            border: 1px solid var(--hd-gray-medium);
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--hd-gray-medium);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .checklist li::before {
+            content: "";
+            display: block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--hd-orange);
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+
+        /* Constraints/Pills */
+        .constraints {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .constraint {
+            background: var(--hd-black);
+            color: var(--hd-white);
+            padding: 10px 20px;
+            font-weight: 700;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        /* Collapsible Sections */
+        .section {
+            margin: 24px 0;
+            border: 1px solid var(--hd-gray-medium);
+        }
+
+        .section-header {
+            background: var(--hd-black);
+            color: var(--hd-white);
+            padding: 16px 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .section-header:hover {
+            background: #1a1a1a;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            color: var(--hd-white);
+            font-size: 1em;
+            border: none;
+            padding: 0;
+        }
+
+        .section-header .toggle {
+            font-size: 1.5em;
+            font-weight: 700;
+            transition: transform 0.3s;
+        }
+
+        .section-header.active .toggle {
+            transform: rotate(45deg);
+        }
+
+        .section-content {
+            padding: 24px;
+            display: none;
+            background: var(--hd-white);
+        }
+
+        .section-content.active {
+            display: block;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 2px solid var(--hd-gray-medium);
+            text-align: center;
+            color: var(--hd-gray-dark);
+            font-size: 0.85em;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                padding: 0;
+            }
+            .nav, .section-header .toggle {
+                display: none;
+            }
+            .section-content {
+                display: block !important;
+            }
+            .hero {
+                margin: 0 0 24px 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 16px;
+            }
+
+            .hero {
+                padding: 32px 16px;
+                margin: -16px -16px 24px -16px;
+            }
+
+            .flow-diagram {
+                flex-direction: column;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+
+            .metrics {
+                flex-direction: column;
+            }
+
+            .metric {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <h1>External Data & Research</h1>
+    <p class="hero-subtitle">Last Updated:** February 2026</p>
+    <p class="hero-date">Generated: February 03, 2026</p>
+</div>
+
+<nav class="nav">
+    <div class="nav-links">
+        <a href="#1-home-depot-enterprise-scale">1. Home Depot Enterprise Scale</a>
+<a href="#2-website-app-traffic">2. Website & App Traffic</a>
+<a href="#3-pro-customer-segment">3. Pro Customer Segment</a>
+<a href="#4-fulfillment-delivery">4. Fulfillment & Delivery</a>
+<a href="#5-technology-digital-investment">5. Technology & Digital Investment</a>
+<a href="#6-product-team-metrics">6. Product Team Metrics</a>
+<a href="#7-customer-satisfaction">7. Customer Satisfaction</a>
+<a href="#8-competitor-benchmarks">8. Competitor Benchmarks</a>
+<a href="#9-industry-context">9. Industry Context</a>
+<a href="#10-volume-estimates-for-financial-modeling">10. Volume Estimates for Financial Modeling</a>
+    </div>
+</nav>
+
+<main>
+<h1 id="external-data-research">External Data &amp; Research</h1>
+<blockquote>
+<p><strong>Last Updated:</strong> February 2026
+<strong>Purpose:</strong> Quantitative data for case analysis and financial modeling</p>
+</blockquote>
+<hr />
+<h2 id="1-home-depot-enterprise-scale">1. Home Depot Enterprise Scale</h2>
+<h3 id="revenue-transactions">Revenue &amp; Transactions</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Source</th>
+<th>Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Total Revenue (FY2024)</strong></td>
+<td>$159.5B</td>
+<td>Annual Report</td>
+<td>Feb 2025</td>
+</tr>
+<tr>
+<td><strong>Q1 FY2025 Revenue</strong></td>
+<td>$39.9B (+9.4% YoY)</td>
+<td>Earnings</td>
+<td>May 2025</td>
+</tr>
+<tr>
+<td><strong>Annual Transactions</strong></td>
+<td>1.64B</td>
+<td>Statista</td>
+<td>2024</td>
+</tr>
+<tr>
+<td><strong>Daily Transactions</strong></td>
+<td>~4.5M</td>
+<td>Calculated</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Stores</strong></td>
+<td>2,347</td>
+<td>Annual Report</td>
+<td>2024</td>
+</tr>
+<tr>
+<td><strong>Employees</strong></td>
+<td>520,000+</td>
+<td>Annual Report</td>
+<td>2024</td>
+</tr>
+<tr>
+<td><strong>SKUs (estimated)</strong></td>
+<td>500,000+</td>
+<td>Industry estimate</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="online-sales">Online Sales</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Source</th>
+<th>Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Online Sales (FY2024)</strong></td>
+<td>~$21B</td>
+<td>Digital Commerce 360</td>
+<td>2024</td>
+</tr>
+<tr>
+<td><strong>Online Sales (FY2025 projected)</strong></td>
+<td>~$25B</td>
+<td>Digital Commerce 360</td>
+<td>Dec 2025</td>
+</tr>
+<tr>
+<td><strong>Online % of Total</strong></td>
+<td>~13-14%</td>
+<td>Calculated</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Q3 2024 Online Growth</strong></td>
+<td>+11% YoY</td>
+<td>Earnings</td>
+<td>Q3 2024</td>
+</tr>
+<tr>
+<td><strong>Digital Commerce Ranking</strong></td>
+<td>#4 in North America</td>
+<td>Digital Commerce 360</td>
+<td>2024</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-website-app-traffic">2. Website &amp; App Traffic</h2>
+<h3 id="website-traffic-homedepotcom">Website Traffic (homedepot.com)</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Source</th>
+<th>Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Annual Website Visits</strong></td>
+<td>3.5B</td>
+<td>Orange Apron Media</td>
+<td>2024</td>
+</tr>
+<tr>
+<td><strong>Monthly Visits (Oct 2024)</strong></td>
+<td>212M</td>
+<td>Similarweb</td>
+<td>Oct 2024</td>
+</tr>
+<tr>
+<td><strong>Monthly Visits (Apr 2025)</strong></td>
+<td>177M</td>
+<td>Similarweb</td>
+<td>Apr 2025</td>
+</tr>
+<tr>
+<td><strong>YoY Traffic Change (2025)</strong></td>
+<td>-27.26%</td>
+<td>Similarweb</td>
+<td>YTD 2025</td>
+</tr>
+</tbody>
+</table>
+<h3 id="audience-demographics">Audience Demographics</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Gender Split</strong></td>
+<td>52.85% male, 47.15% female</td>
+<td>Similarweb</td>
+</tr>
+<tr>
+<td><strong>Largest Age Group</strong></td>
+<td>45-54 years</td>
+<td>Similarweb</td>
+</tr>
+<tr>
+<td><strong>Individual Customers Reached</strong></td>
+<td>198M</td>
+<td>Orange Apron Media</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-pro-customer-segment">3. Pro Customer Segment</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Source</th>
+<th>Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Pro % of Customer Base</strong></td>
+<td>~10%</td>
+<td>PYMNTS</td>
+<td>Q2 2025</td>
+</tr>
+<tr>
+<td><strong>Pro % of Total Sales</strong></td>
+<td>~50%</td>
+<td>PYMNTS</td>
+<td>Q2 2025</td>
+</tr>
+<tr>
+<td><strong>Total Addressable Pro Market</strong></td>
+<td>$450B</td>
+<td>PYMNTS</td>
+<td>Q2 2025</td>
+</tr>
+<tr>
+<td><strong>Incremental B2B Sales (17 markets)</strong></td>
+<td>$1B+ annually</td>
+<td>Digital Commerce 360</td>
+<td>Q4 2024</td>
+</tr>
+<tr>
+<td><strong>Pro Markets with Enhanced Fulfillment</strong></td>
+<td>17</td>
+<td>HD Corporate</td>
+<td>End 2024</td>
+</tr>
+</tbody>
+</table>
+<h3 id="srs-distribution-acquisition">SRS Distribution Acquisition</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Source</th>
+<th>Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Acquisition Price</strong></td>
+<td>$18.25B</td>
+<td>HD IR</td>
+<td>Jun 2024</td>
+</tr>
+<tr>
+<td><strong>SRS 2023 Revenue</strong></td>
+<td>$9.8B</td>
+<td>HD IR</td>
+<td>Mar 2024</td>
+</tr>
+<tr>
+<td><strong>SRS Adjusted EBITDA</strong></td>
+<td>~$1.1B</td>
+<td>HD IR</td>
+<td>Mar 2024</td>
+</tr>
+<tr>
+<td><strong>SRS Branches</strong></td>
+<td>780+</td>
+<td>Annual Report</td>
+<td>2024</td>
+</tr>
+<tr>
+<td><strong>SRS Employees</strong></td>
+<td>11,000+</td>
+<td>HD IR</td>
+<td>2024</td>
+</tr>
+<tr>
+<td><strong>SRS Daily Job Site Deliveries</strong></td>
+<td>15,000</td>
+<td>CNBC</td>
+<td>Nov 2024</td>
+</tr>
+<tr>
+<td><strong>TAM Expansion from SRS</strong></td>
+<td>+$50B</td>
+<td>HD IR</td>
+<td>Mar 2024</td>
+</tr>
+</tbody>
+</table>
+<h3 id="gms-acquisition-via-srs">GMS Acquisition (via SRS)</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Source</th>
+<th>Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Acquisition Price</strong></td>
+<td>~$5.5B (enterprise value)</td>
+<td>HD IR</td>
+<td>Sep 2025</td>
+</tr>
+<tr>
+<td><strong>Product Focus</strong></td>
+<td>Drywall, ceilings, steel framing</td>
+<td>HD Corporate</td>
+<td>Sep 2025</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-fulfillment-delivery">4. Fulfillment &amp; Delivery</h2>
+<h3 id="bopis-buy-online-pickup-in-store">BOPIS (Buy Online Pickup In Store)</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Source</th>
+<th>Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>BOPIS % of Online Orders</strong></td>
+<td>~40-50%</td>
+<td>Multiple sources</td>
+<td>2024-2025</td>
+</tr>
+<tr>
+<td><strong>Additional In-Store Purchases</strong></td>
+<td>85% of BOPIS customers</td>
+<td>Industry survey</td>
+<td>2024</td>
+</tr>
+</tbody>
+</table>
+<h3 id="delivery-speed">Delivery Speed</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>2022</th>
+<th>2025</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Same/Next-Day Delivery (in-stock)</strong></td>
+<td>~18%</td>
+<td><strong>55%</strong></td>
+<td>Supply Chain Dive</td>
+</tr>
+<tr>
+<td><strong>Extended Aisle Delivery</strong></td>
+<td>5-9 days</td>
+<td>1-2 days (50%+)</td>
+<td>Supply Chain Dive</td>
+</tr>
+</tbody>
+</table>
+<h3 id="supply-chain-infrastructure">Supply Chain Infrastructure</h3>
+<table>
+<thead>
+<tr>
+<th>Facility Type</th>
+<th>Count</th>
+<th>Purpose</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Direct Fulfillment Centers</strong></td>
+<td>20</td>
+<td>Light SKUs, fast delivery</td>
+<td>Supply Chain Dive</td>
+</tr>
+<tr>
+<td><strong>Flatbed Distribution Centers</strong></td>
+<td>17</td>
+<td>Lumber, building materials</td>
+<td>Supply Chain Dive</td>
+</tr>
+<tr>
+<td><strong>Total Facilities (network)</strong></td>
+<td>~200</td>
+<td>Various logistical roles</td>
+<td>Supply Chain Dive</td>
+</tr>
+<tr>
+<td><strong>SRS Branches</strong></td>
+<td>780+</td>
+<td>Pro specialty distribution</td>
+<td>Annual Report</td>
+</tr>
+<tr>
+<td><strong>HD Supply Facilities</strong></td>
+<td>129</td>
+<td>MRO distribution</td>
+<td>On The Seams</td>
+</tr>
+</tbody>
+</table>
+<h3 id="delivery-partnerships-2025">Delivery Partnerships (2025)</h3>
+<ul>
+<li>DoorDash (on-demand delivery)</li>
+<li>Uber Eats (on-demand delivery)</li>
+</ul>
+<h3 id="investment">Investment</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Facility Buildout Investment</strong></td>
+<td>$1.2B</td>
+<td>HD Corporate</td>
+</tr>
+<tr>
+<td><strong>Goal</strong></td>
+<td>90% of U.S. customers with same/next-day</td>
+<td>HD Corporate</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5-technology-digital-investment">5. Technology &amp; Digital Investment</h2>
+<h3 id="spending">Spending</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Source</th>
+<th>Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Annual ICT Spending</strong></td>
+<td>~$4.0B</td>
+<td>GlobalData estimate</td>
+<td>2024</td>
+</tr>
+<tr>
+<td><strong>Planned CapEx (FY2025)</strong></td>
+<td>~$4.0B</td>
+<td>Annual Report</td>
+<td>2025</td>
+</tr>
+<tr>
+<td><strong>Home Depot Ventures Fund</strong></td>
+<td>$150M</td>
+<td>HD Corporate</td>
+<td>Est. 2022</td>
+</tr>
+</tbody>
+</table>
+<h3 id="technology-team">Technology Team</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Source</th>
+<th>Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Technologists</strong></td>
+<td>8,500+</td>
+<td>Siddiqui LinkedIn</td>
+<td>May 2025</td>
+</tr>
+<tr>
+<td><strong>AI/ML Use Cases (piloted)</strong></td>
+<td>175+</td>
+<td>National CIO Review</td>
+<td>Mid-2024</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cloud-partnership">Cloud Partnership</h3>
+<ul>
+<li><strong>Primary Partner:</strong> Google Cloud</li>
+<li><strong>Technologies:</strong> Vertex AI, Gemini models</li>
+<li><strong>Scope:</strong> AI/ML, inventory management, supply chain, customer experience</li>
+</ul>
+<hr />
+<h2 id="6-product-team-metrics">6. Product Team Metrics</h2>
+<h3 id="magic-apron-ai-chatbot">Magic Apron (AI Chatbot)</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Source</th>
+<th>Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Launch Date</strong></td>
+<td>March 6, 2025</td>
+<td>HD Corporate</td>
+<td>Mar 2025</td>
+</tr>
+<tr>
+<td><strong>Pages Deployed</strong></td>
+<td>Millions</td>
+<td>HD Corporate</td>
+<td>Mar 2025</td>
+</tr>
+<tr>
+<td><strong>Impact</strong></td>
+<td>"Strong customer engagement, contributing to growth in online conversion"</td>
+<td>Q1 2025 Earnings</td>
+<td>May 2025</td>
+</tr>
+<tr>
+<td><strong>Pro Materials List (Beta)</strong></td>
+<td>November 2025</td>
+<td>HD Corporate</td>
+<td>Nov 2025</td>
+</tr>
+</tbody>
+</table>
+<h3 id="orange-apron-media-retail-media-network">Orange Apron Media (Retail Media Network)</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Source</th>
+<th>Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Launch (as Retail Media+)</strong></td>
+<td>2018</td>
+<td>Marketing Brew</td>
+<td>2024</td>
+</tr>
+<tr>
+<td><strong>Rebrand to Orange Apron Media</strong></td>
+<td>March 2024</td>
+<td>Marketing Dive</td>
+<td>Mar 2024</td>
+</tr>
+<tr>
+<td><strong>Current Advertisers</strong></td>
+<td>"A few thousand" suppliers</td>
+<td>Marketing Dive</td>
+<td>Oct 2024</td>
+</tr>
+<tr>
+<td><strong>Advertiser Growth Target</strong></td>
+<td>Double (add a few thousand more)</td>
+<td>Marketing Dive</td>
+<td>2024</td>
+</tr>
+<tr>
+<td><strong>Annual Website Visits</strong></td>
+<td>3.5B</td>
+<td>Orange Apron Media</td>
+<td>2024</td>
+</tr>
+<tr>
+<td><strong>Individual Customers</strong></td>
+<td>198M</td>
+<td>Orange Apron Media</td>
+<td>2024</td>
+</tr>
+<tr>
+<td><strong>Advertiser ROAS</strong></td>
+<td>≥2x</td>
+<td>Orange Apron Media</td>
+<td>2024</td>
+</tr>
+<tr>
+<td><strong>Shopper Spend Lift (ad-engaged)</strong></td>
+<td>+28% per visit</td>
+<td>Orange Apron Media</td>
+<td>2024</td>
+</tr>
+<tr>
+<td><strong>Conversion Lift (ad-engaged)</strong></td>
+<td>+26%</td>
+<td>Orange Apron Media</td>
+<td>2024</td>
+</tr>
+<tr>
+<td><strong>Orange Halo Effect - Purchase Intent</strong></td>
+<td>+36%</td>
+<td>Orange Apron Media</td>
+<td>2024</td>
+</tr>
+<tr>
+<td><strong>Orange Halo Effect - Ad Recall (Meta)</strong></td>
+<td>+75%</td>
+<td>Orange Apron Media</td>
+<td>2024</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sidekick-associate-app">Sidekick (Associate App)</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Source</th>
+<th>Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Launch Date</strong></td>
+<td>January 2023</td>
+<td>HD Corporate</td>
+<td>Jan 2023</td>
+</tr>
+<tr>
+<td><strong>Stores Deployed</strong></td>
+<td>600+</td>
+<td>CIO Dive</td>
+<td>2023</td>
+</tr>
+<tr>
+<td><strong>Technology</strong></td>
+<td>ML-powered, machine vision</td>
+<td>HD Corporate</td>
+<td>2023</td>
+</tr>
+</tbody>
+</table>
+<h3 id="search-recommendations">Search &amp; Recommendations</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>System Name</strong></td>
+<td>Intent Search</td>
+<td>HD Corporate</td>
+</tr>
+<tr>
+<td><strong>Approach</strong></td>
+<td>Intent-based (not keyword-based)</td>
+<td>HD Corporate</td>
+</tr>
+<tr>
+<td><strong>Results</strong></td>
+<td>Higher CTR, better conversion, increased revenue/search</td>
+<td>HD Corporate</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mobile-app">Mobile App</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Source</th>
+<th>Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>HD Pass Wallet Launch</strong></td>
+<td>October 2025</td>
+<td>Hardware Retailing</td>
+<td>Oct 2025</td>
+</tr>
+<tr>
+<td><strong>App Version (Android)</strong></td>
+<td>7.55</td>
+<td>App Store</td>
+<td>Nov 2025</td>
+</tr>
+<tr>
+<td><strong>APK Size</strong></td>
+<td>78.60 MB</td>
+<td>App Store</td>
+<td>Nov 2025</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="7-customer-satisfaction">7. Customer Satisfaction</h2>
+<h3 id="nps-q1-2025">NPS (Q1 2025)</h3>
+<table>
+<thead>
+<tr>
+<th>Company</th>
+<th>NPS</th>
+<th>vs. Industry Avg (37)</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Home Depot</strong></td>
+<td>43</td>
+<td>+6</td>
+<td>QuestionPro</td>
+</tr>
+<tr>
+<td><strong>Lowe's</strong></td>
+<td>29</td>
+<td>-8</td>
+<td>QuestionPro</td>
+</tr>
+</tbody>
+</table>
+<h3 id="jd-power-customer-satisfaction-2025">J.D. Power Customer Satisfaction (2025)</h3>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Company</th>
+<th>Score (out of 1000)</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Lowe's</td>
+<td>680</td>
+<td>Chain Store Age</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Ace Hardware</td>
+<td>672</td>
+<td>Chain Store Age</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Menards</td>
+<td>669</td>
+<td>Chain Store Age</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Home Depot</strong></td>
+<td>641</td>
+<td>Chain Store Age</td>
+</tr>
+<tr>
+<td>—</td>
+<td>Industry Average</td>
+<td>671</td>
+<td>Chain Store Age</td>
+</tr>
+</tbody>
+</table>
+<h3 id="delivery-satisfaction">Delivery Satisfaction</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Satisfaction Increase from Faster Delivery</strong></td>
+<td>+4%</td>
+<td>Supply Chain Dive</td>
+</tr>
+<tr>
+<td><strong>2025 Projection</strong></td>
+<td>"Highest year ever for delivery customer satisfaction"</td>
+<td>Supply Chain Dive</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="8-competitor-benchmarks">8. Competitor Benchmarks</h2>
+<h3 id="lowes">Lowe's</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Source</th>
+<th>Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AI Chatbot</strong></td>
+<td>Mylow (OpenAI/ChatGPT)</td>
+<td>Lowe's Corporate</td>
+<td>Mar 2025</td>
+</tr>
+<tr>
+<td><strong>Mylow Launch</strong></td>
+<td>March 5, 2025</td>
+<td>Lowe's Corporate</td>
+<td>Mar 2025</td>
+</tr>
+<tr>
+<td><strong>Conversion Lift (Mylow users)</strong></td>
+<td>2x</td>
+<td>Modern Retail</td>
+<td>Nov 2025</td>
+</tr>
+<tr>
+<td><strong>CSAT Lift (Mylow Companion)</strong></td>
+<td>+200 bps</td>
+<td>Lowe's earnings</td>
+<td>2025</td>
+</tr>
+<tr>
+<td><strong>OpenAI Token Milestone</strong></td>
+<td>100B</td>
+<td>OpenAI</td>
+<td>2025</td>
+</tr>
+<tr>
+<td><strong>Projected Online Sales (2025)</strong></td>
+<td>$12.17B</td>
+<td>Digital Commerce 360</td>
+<td>2025</td>
+</tr>
+<tr>
+<td><strong>Stores</strong></td>
+<td>1,700+</td>
+<td>Lowe's Corporate</td>
+<td>2025</td>
+</tr>
+<tr>
+<td><strong>NPS</strong></td>
+<td>29</td>
+<td>QuestionPro</td>
+<td>Q1 2025</td>
+</tr>
+<tr>
+<td><strong>J.D. Power Score</strong></td>
+<td>680 (#1)</td>
+<td>Chain Store Age</td>
+<td>2025</td>
+</tr>
+</tbody>
+</table>
+<h3 id="walmart-for-context">Walmart (for context)</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Source</th>
+<th>Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Global eCommerce Sales</strong></td>
+<td>$100B+</td>
+<td>Grocery Doppio</td>
+<td>2024</td>
+</tr>
+<tr>
+<td><strong>U.S. eCommerce Growth</strong></td>
+<td>Double-digit (6 consecutive quarters)</td>
+<td>Grocery Doppio</td>
+<td>2024</td>
+</tr>
+<tr>
+<td><strong>Fulfillment Cost Reduction Target</strong></td>
+<td>~20%</td>
+<td>HomePage News</td>
+<td>2024</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="9-industry-context">9. Industry Context</h2>
+<h3 id="retail-media-market">Retail Media Market</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Source</th>
+<th>Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>U.S. Retail Media Spend (2025)</strong></td>
+<td>$166B (projected)</td>
+<td>Marketing Dive</td>
+<td>2024</td>
+</tr>
+<tr>
+<td><strong>Retail Media % of Digital Ad Spend</strong></td>
+<td>~20%</td>
+<td>Marketing Dive</td>
+<td>2025</td>
+</tr>
+<tr>
+<td><strong>Annual Growth Rate</strong></td>
+<td>~20%/year</td>
+<td>Marketing Dive</td>
+<td>2024</td>
+</tr>
+<tr>
+<td><strong>2027 Projection</strong></td>
+<td>$109.4B (eMarketer)</td>
+<td>Marketing Dive</td>
+<td>2027</td>
+</tr>
+</tbody>
+</table>
+<h3 id="bopis-market">BOPIS Market</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Source</th>
+<th>Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>U.S. BOPIS Market (2024)</strong></td>
+<td>$129.36B</td>
+<td>BusinessWire</td>
+<td>2024</td>
+</tr>
+<tr>
+<td><strong>U.S. BOPIS Sales (2025)</strong></td>
+<td>$154.3B (projected)</td>
+<td>Fit Small Business</td>
+<td>2025</td>
+</tr>
+<tr>
+<td><strong>BOPIS % of eCommerce</strong></td>
+<td>10.5%</td>
+<td>Fit Small Business</td>
+<td>2025</td>
+</tr>
+<tr>
+<td><strong>CAGR (2025-2033)</strong></td>
+<td>16.45%</td>
+<td>BusinessWire</td>
+<td>2024</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="10-volume-estimates-for-financial-modeling">10. Volume Estimates for Financial Modeling</h2>
+<h3 id="transaction-volume-breakdown-estimated">Transaction Volume Breakdown (Estimated)</h3>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Daily Volume</th>
+<th>Annual Volume</th>
+<th>Calculation Basis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Total Transactions</strong></td>
+<td>4.5M</td>
+<td>1.64B</td>
+<td>Statista</td>
+</tr>
+<tr>
+<td><strong>Online Transactions</strong></td>
+<td>~585K</td>
+<td>~213M</td>
+<td>~13% of total</td>
+</tr>
+<tr>
+<td><strong>BOPIS Orders</strong></td>
+<td>~234K</td>
+<td>~85M</td>
+<td>~40% of online</td>
+</tr>
+<tr>
+<td><strong>Same/Next-Day Deliveries</strong></td>
+<td>~322K</td>
+<td>~117M</td>
+<td>55% of online</td>
+</tr>
+<tr>
+<td><strong>Pro Transactions</strong></td>
+<td>~450K</td>
+<td>~164M</td>
+<td>~10% of customers, higher frequency</td>
+</tr>
+</tbody>
+</table>
+<h3 id="digital-event-volume-estimated-for-event-streaming">Digital Event Volume (Estimated for Event Streaming)</h3>
+<p>If each customer interaction generates events:</p>
+<table>
+<thead>
+<tr>
+<th>Event Type</th>
+<th>Est. Daily Volume</th>
+<th>Annual Volume</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Product Page Views</strong></td>
+<td>~10M+</td>
+<td>3.5B (website visits)</td>
+</tr>
+<tr>
+<td><strong>Search Queries</strong></td>
+<td>~5M+</td>
+<td>~1.8B</td>
+</tr>
+<tr>
+<td><strong>Add to Cart</strong></td>
+<td>~2M+</td>
+<td>~730M</td>
+</tr>
+<tr>
+<td><strong>Checkout Initiated</strong></td>
+<td>~1M+</td>
+<td>~365M</td>
+</tr>
+<tr>
+<td><strong>Recommendations Served</strong></td>
+<td>~50M+</td>
+<td>~18B</td>
+</tr>
+<tr>
+<td><strong>Magic Apron Interactions</strong></td>
+<td>TBD</td>
+<td>TBD</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note:</strong> These are rough estimates for financial modeling. Actual event volumes depend on system architecture.</p>
+<hr />
+<h2 id="11-infrastructure-cost-estimates-for-financial-modeling">11. Infrastructure Cost Estimates (For Financial Modeling)</h2>
+<blockquote>
+<p><strong>Note:</strong> Home Depot uses Google Cloud as primary partner, but AWS pricing is included for comparison and industry benchmarking.</p>
+</blockquote>
+<h3 id="event-streaming-platform-options">Event Streaming Platform Options</h3>
+<h4 id="aws-msk-managed-kafka-reference-pricing">AWS MSK (Managed Kafka) — Reference Pricing</h4>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Cost</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Broker Instance (kafka.m5.large)</strong></td>
+<td>~$0.21/hour</td>
+<td>Per broker</td>
+</tr>
+<tr>
+<td><strong>Broker Instance (kafka.m7g.large)</strong></td>
+<td>~$0.15-0.20/hour</td>
+<td>Newer ARM-based</td>
+</tr>
+<tr>
+<td><strong>Standard Storage</strong></td>
+<td>$0.10/GB-month</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Low-Cost Storage</strong></td>
+<td>$0.06/GB-month</td>
+<td>For cold data</td>
+</tr>
+<tr>
+<td><strong>Data Transfer (inbound)</strong></td>
+<td>Free</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Data Transfer (cross-AZ)</strong></td>
+<td>Standard AWS rates</td>
+<td>Replication is free</td>
+</tr>
+<tr>
+<td><strong>MSK Serverless</strong></td>
+<td>Per data processed</td>
+<td>Variable workloads</td>
+</tr>
+<tr>
+<td><strong>MSK Connect (MCU)</strong></td>
+<td>$0.11/MCU-hour</td>
+<td>1 vCPU + 4GB per MCU</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Source:</strong> <a href="https://aws.amazon.com/msk/pricing/">AWS MSK Pricing</a></p>
+<h4 id="aws-kinesis-reference-pricing">AWS Kinesis — Reference Pricing</h4>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Cost</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Shard Hour</strong></td>
+<td>~$0.015/shard-hour</td>
+<td>Provisioned mode</td>
+</tr>
+<tr>
+<td><strong>PUT Payload Unit</strong></td>
+<td>~$0.014/million</td>
+<td>25KB per unit</td>
+</tr>
+<tr>
+<td><strong>Firehose Ingestion</strong></td>
+<td>~$0.029/GB</td>
+<td>First 500 TB/month</td>
+</tr>
+<tr>
+<td><strong>On-Demand Mode</strong></td>
+<td>Per GB written/read</td>
+<td>Auto-scales</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Source:</strong> <a href="https://aws.amazon.com/kinesis/pricing/">AWS Kinesis Pricing</a></p>
+<h4 id="google-cloud-pubsub-reference-pricing">Google Cloud Pub/Sub — Reference Pricing</h4>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Cost</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>First 10 GiB/month</strong></td>
+<td>Free</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Message Delivery</strong></td>
+<td>~$40/TiB</td>
+<td>After free tier</td>
+</tr>
+<tr>
+<td><strong>Message Storage</strong></td>
+<td>Additional</td>
+<td>For retained messages</td>
+</tr>
+<tr>
+<td><strong>Minimum Billing</strong></td>
+<td>1KB/message</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Source:</strong> <a href="https://cloud.google.com/pubsub/pricing">Google Cloud Pub/Sub Pricing</a></p>
+<h3 id="cost-model-event-streaming-visibility-layer">Cost Model: Event Streaming Visibility Layer</h3>
+<p>Based on estimated Home Depot digital event volumes:</p>
+<h4 id="volume-assumptions">Volume Assumptions</h4>
+<table>
+<thead>
+<tr>
+<th>Event Type</th>
+<th>Daily Volume</th>
+<th>Monthly Volume</th>
+<th>Avg Size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Product Views</strong></td>
+<td>10M</td>
+<td>300M</td>
+<td>~500 bytes</td>
+</tr>
+<tr>
+<td><strong>Search Events</strong></td>
+<td>5M</td>
+<td>150M</td>
+<td>~200 bytes</td>
+</tr>
+<tr>
+<td><strong>Cart Events</strong></td>
+<td>2M</td>
+<td>60M</td>
+<td>~300 bytes</td>
+</tr>
+<tr>
+<td><strong>Recommendations</strong></td>
+<td>50M</td>
+<td>1.5B</td>
+<td>~200 bytes</td>
+</tr>
+<tr>
+<td><strong>Inventory Checks</strong></td>
+<td>5M</td>
+<td>150M</td>
+<td>~100 bytes</td>
+</tr>
+<tr>
+<td><strong>Total Events</strong></td>
+<td>~72M/day</td>
+<td>~2.2B/month</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h4 id="monthly-data-volume-estimate">Monthly Data Volume Estimate</h4>
+<table>
+<thead>
+<tr>
+<th>Calculation</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Total Events</strong></td>
+<td>~2.2B/month</td>
+</tr>
+<tr>
+<td><strong>Avg Event Size</strong></td>
+<td>~250 bytes</td>
+</tr>
+<tr>
+<td><strong>Raw Data Volume</strong></td>
+<td>~550 GB/month</td>
+</tr>
+<tr>
+<td><strong>With Replication (3x)</strong></td>
+<td>~1.65 TB/month</td>
+</tr>
+</tbody>
+</table>
+<h4 id="rough-cost-range-monthly">Rough Cost Range (Monthly)</h4>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Low Estimate</th>
+<th>High Estimate</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AWS MSK (Provisioned)</strong></td>
+<td>$2,000</td>
+<td>$8,000</td>
+<td>3-6 brokers + storage</td>
+</tr>
+<tr>
+<td><strong>AWS MSK (Serverless)</strong></td>
+<td>$1,500</td>
+<td>$5,000</td>
+<td>Variable workloads</td>
+</tr>
+<tr>
+<td><strong>AWS Kinesis</strong></td>
+<td>$1,000</td>
+<td>$4,000</td>
+<td>On-demand mode</td>
+</tr>
+<tr>
+<td><strong>Google Cloud Pub/Sub</strong></td>
+<td>$800</td>
+<td>$3,000</td>
+<td>After free tier</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Annual Range:</strong> $12K - $96K for streaming infrastructure alone</p>
+<h4 id="full-solution-cost-components">Full Solution Cost Components</h4>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Annual Cost Range</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Event Streaming Platform</strong></td>
+<td>$50K - $150K</td>
+<td>Includes redundancy</td>
+</tr>
+<tr>
+<td><strong>Collision Detection ML</strong></td>
+<td>$100K - $300K</td>
+<td>Model training + inference</td>
+</tr>
+<tr>
+<td><strong>Dashboard/Visibility</strong></td>
+<td>$50K - $100K</td>
+<td>Development + hosting</td>
+</tr>
+<tr>
+<td><strong>Engineering (FTE)</strong></td>
+<td>$500K - $1M</td>
+<td>2-4 engineers</td>
+</tr>
+<tr>
+<td><strong>Total Year 1</strong></td>
+<td>$700K - $1.5M</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Ongoing (Year 2+)</strong></td>
+<td>$300K - $600K</td>
+<td>Maintenance + infra</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Source:</strong> Estimates based on AWS/GCP public pricing and industry benchmarks</p>
+<h3 id="roi-framework">ROI Framework</h3>
+<h4 id="potential-savings-from-collision-detection">Potential Savings from Collision Detection</h4>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Current Cost (Estimated)</th>
+<th>Potential Reduction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Redundant Development</strong></td>
+<td>$5M-10M/year (50% redundancy rate)</td>
+<td>20-40% reduction</td>
+</tr>
+<tr>
+<td><strong>Customer Churn (friction)</strong></td>
+<td>$10M-50M/year</td>
+<td>5-15% reduction</td>
+</tr>
+<tr>
+<td><strong>Out-of-Stock Errors</strong></td>
+<td>$2M-5M/year</td>
+<td>30-50% reduction</td>
+</tr>
+<tr>
+<td><strong>Support Escalations</strong></td>
+<td>$1M-3M/year</td>
+<td>10-20% reduction</td>
+</tr>
+</tbody>
+</table>
+<h4 id="break-even-analysis">Break-Even Analysis</h4>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Investment</th>
+<th>Required Savings</th>
+<th>Break-Even</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Conservative</strong></td>
+<td>$1.5M (Year 1)</td>
+<td>$1.5M</td>
+<td>Reduce redundancy 15%</td>
+</tr>
+<tr>
+<td><strong>Moderate</strong></td>
+<td>$1.5M (Year 1)</td>
+<td>$3M</td>
+<td>Reduce redundancy 30%</td>
+</tr>
+<tr>
+<td><strong>Aggressive</strong></td>
+<td>$1.5M (Year 1)</td>
+<td>$5M+</td>
+<td>+ Customer retention lift</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="12-financial-quantification-data-gap-fills">12. Financial Quantification Data (Gap Fills)</h2>
+<h3 id="nps-revenue-correlation">NPS Revenue Correlation</h3>
+<table>
+<thead>
+<tr>
+<th>Finding</th>
+<th>Value</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>NPS to Revenue</strong></td>
+<td>7-point NPS increase = 1% revenue growth</td>
+<td>Temkin Group / LSE</td>
+</tr>
+<tr>
+<td><strong>Promoter Revenue</strong></td>
+<td>Promoters generate 1.5x more revenue than detractors</td>
+<td>Temkin Group</td>
+</tr>
+<tr>
+<td><strong>Customer Tenure</strong></td>
+<td>Promoters stay 50% longer (6.2 vs 4.1 years)</td>
+<td>LSE Study</td>
+</tr>
+<tr>
+<td><strong>Promoter CLV</strong></td>
+<td>2.6x higher customer lifetime value</td>
+<td>LSE Study</td>
+</tr>
+<tr>
+<td><strong>Top NPS Quartile</strong></td>
+<td>25% higher revenue growth</td>
+<td>Industry research</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Home Depot Application:</strong>
+- HD NPS: 43 vs Lowe's 29 = 14-point advantage
+- Per Temkin formula: 14 ÷ 7 = <strong>~2% revenue advantage</strong>
+- At $159B revenue = <strong>~$3.2B annual revenue benefit</strong> from NPS lead</p>
+<p><strong>Source:</strong> <a href="https://customergauge.com/blog/nps-impact-on-revenue">CustomerGauge</a>, <a href="https://surveysparrow.com/blog/nps-in-retail/">SurveySparrow</a></p>
+<h3 id="jd-power-satisfaction-impact">J.D. Power Satisfaction Impact</h3>
+<table>
+<thead>
+<tr>
+<th>Finding</th>
+<th>Value</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Problem Resolution Impact</strong></td>
+<td>+246 points when problem resolved</td>
+<td>J.D. Power Banking</td>
+</tr>
+<tr>
+<td><strong>Financial Health Tools Awareness</strong></td>
+<td>+96 points satisfaction</td>
+<td>J.D. Power Banking</td>
+</tr>
+<tr>
+<td><strong>Loyalty Correlation</strong></td>
+<td>Higher satisfaction = higher retention, reuse, NPS</td>
+<td>J.D. Power</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Home Depot Application:</strong>
+- HD J.D. Power: 641 vs Lowe's 680 = <strong>39-point deficit</strong>
+- HD ranks #4 despite market leadership
+- Gap suggests friction/coordination issues impacting satisfaction</p>
+<p><strong>Source:</strong> <a href="https://www.jdpower.com/business/retail-banking-satisfaction-study">J.D. Power</a></p>
+<h3 id="customer-service-call-costs">Customer Service Call Costs</h3>
+<table>
+<thead>
+<tr>
+<th>Region/Type</th>
+<th>Cost</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Average Cost per Call</strong></td>
+<td>$2.70 - $5.60</td>
+<td>Industry benchmark</td>
+</tr>
+<tr>
+<td><strong>Per Minute (US outsourced)</strong></td>
+<td>$1.33 - $1.45</td>
+<td>2025 data</td>
+</tr>
+<tr>
+<td><strong>Per Call (paid)</strong></td>
+<td>$0.73 - $2.27</td>
+<td>2025 data</td>
+</tr>
+<tr>
+<td><strong>US Agent Hourly (outsourced)</strong></td>
+<td>$28 - $40/hour</td>
+<td>2025 data</td>
+</tr>
+<tr>
+<td><strong>Tier 2 Tech Support</strong></td>
+<td>$30 - $50/hour</td>
+<td>2025 data</td>
+</tr>
+<tr>
+<td><strong>Labor % of Call Center Cost</strong></td>
+<td>60-75%</td>
+<td>Industry benchmark</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Home Depot Application:</strong>
+- If coordination issues cause 10% more calls → at 1.64B transactions
+- Even 0.1% call rate = 1.64M calls/year
+- At $4/call average = <strong>$6.6M annual call cost</strong>
+- 10% increase from friction = <strong>~$660K additional cost</strong></p>
+<p><strong>Source:</strong> <a href="https://www.crescendo.ai/blog/outsourced-call-center-pricing-guide">Crescendo.ai</a>, <a href="https://priceithere.com/call-center-services-cost/">PriceItHere</a></p>
+<h3 id="out-of-stock-inventory-error-costs">Out-of-Stock / Inventory Error Costs</h3>
+<table>
+<thead>
+<tr>
+<th>Finding</th>
+<th>Value</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Global Retail OOS Cost</strong></td>
+<td>$1.2T - $1.75T annually</td>
+<td>Multiple sources</td>
+</tr>
+<tr>
+<td><strong>US Food Retail OOS</strong></td>
+<td>$15B - $20B/year (3% of sales)</td>
+<td>Industry research</td>
+</tr>
+<tr>
+<td><strong>Inventory Distortion (global)</strong></td>
+<td>$818B/year (52% OOS, 44% overstock)</td>
+<td>IHL Group</td>
+</tr>
+<tr>
+<td><strong>Profit Loss from OOS</strong></td>
+<td>~3% annually</td>
+<td>Industry average</td>
+</tr>
+<tr>
+<td><strong>Customer Defection on OOS</strong></td>
+<td>43% go to competitor</td>
+<td>Retail research</td>
+</tr>
+<tr>
+<td><strong>Additional Supply Chain Costs</strong></td>
+<td>43% of retailers report</td>
+<td>Survey data</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Home Depot Application:</strong>
+- HD Online Sales: $21B
+- If 3% lost to OOS errors = <strong>$630M potential annual loss</strong>
+- If coordination (chatbot/inventory sync) causes 10% of OOS issues = <strong>$63M attributable</strong>
+- 43% defection rate validates Maria's "drove to Lowe's" verbatim</p>
+<p><strong>Source:</strong> <a href="https://www.mirakl.com/blog/out-of-stocks-ecommerce-inventory-management-problem">Mirakl</a>, <a href="https://www.toolsgroup.com/blog/the-hidden-costs-of-poor-inventory-management-how-much-are-you-really-losing/">ToolsGroup</a></p>
+<h3 id="software-development-redundancy-costs">Software Development Redundancy Costs</h3>
+<table>
+<thead>
+<tr>
+<th>Finding</th>
+<th>Value</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Enterprise Average Apps</strong></td>
+<td>275 applications</td>
+<td>Flexera</td>
+</tr>
+<tr>
+<td><strong>Annual App Spend (enterprise)</strong></td>
+<td>~$49M</td>
+<td>Flexera</td>
+</tr>
+<tr>
+<td><strong>Top 3 Redundant Functions</strong></td>
+<td>$477K - $2.8M savings potential</td>
+<td>Flexera</td>
+</tr>
+<tr>
+<td><strong>SaaS License Waste</strong></td>
+<td>30% wasted</td>
+<td>Gartner</td>
+</tr>
+<tr>
+<td><strong>"20% Waste" Threshold</strong></td>
+<td>Typically hit at ~50 employees</td>
+<td>Industry observation</td>
+</tr>
+<tr>
+<td><strong>IT Controls Only</strong></td>
+<td>26% of spend, 16% of apps</td>
+<td>Shadow IT data</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Home Depot Application (from Exhibit 4):</strong>
+- 2026 Roadmap: 90,900 person-hours planned
+- = ~44 FTEs at 2,080 hrs/year
+- Case states 45-50% redundancy rate
+- At 45% redundancy: <strong>~20 FTEs duplicate work</strong>
+- At $150K fully-loaded: <strong>~$3M/year wasted on redundancy</strong></p>
+<p><strong>Source:</strong> <a href="https://www.flexera.com/blog/saas-management/how-much-are-redundant-saas-apps-costing-you/">Flexera</a>, <a href="https://zylo.com/blog/software-redundancy/">Zylo</a></p>
+<h3 id="event-streaming-at-retail-scale-benchmarks">Event Streaming at Retail Scale (Benchmarks)</h3>
+<table>
+<thead>
+<tr>
+<th>Company</th>
+<th>Scale</th>
+<th>Use Case</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Walmart</strong></td>
+<td>11B events/day, 8,500 nodes</td>
+<td>Real-time inventory, omnichannel</td>
+<td>Confluent</td>
+</tr>
+<tr>
+<td><strong>BigCommerce</strong></td>
+<td>1.6B messages/day</td>
+<td>E-commerce events</td>
+<td>Confluent</td>
+</tr>
+<tr>
+<td><strong>Sainsbury's</strong></td>
+<td>500M events/day, 1M transactions</td>
+<td>Inventory, never out of stock</td>
+<td>Confluent</td>
+</tr>
+<tr>
+<td><strong>Dollar General</strong></td>
+<td>20,000+ stores</td>
+<td>Replenishment, inventory, merchandising</td>
+<td>Confluent</td>
+</tr>
+<tr>
+<td><strong>Target</strong></td>
+<td>Not specified</td>
+<td>Omnichannel distribution</td>
+<td>Confluent</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Home Depot Application:</strong>
+- HD: 4.5M daily transactions, 3.5B annual web visits
+- Estimated events: 72M/day (product views, search, cart, recs)
+- Well within proven retail Kafka scale (Walmart does 11B/day)
+- Architecture validated by multiple retailers</p>
+<p><strong>Source:</strong> <a href="https://www.kai-waehner.de/blog/2021/01/28/apache-kafka-in-retail-use-cases-architecture-case-studies-examples/">Kai Waehner</a>, <a href="https://www.confluent.io/industry-solutions/retail/">Confluent</a></p>
+<h3 id="lowes-technology-challenges-validates-industry-pattern">Lowe's Technology Challenges (Validates Industry Pattern)</h3>
+<table>
+<thead>
+<tr>
+<th>Challenge</th>
+<th>Details</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Legacy Systems</strong></td>
+<td>Stores run on 1990s systems; merchandising from early 2000s</td>
+<td>CDO Magazine</td>
+</tr>
+<tr>
+<td><strong>Data Fragmentation</strong></td>
+<td>"Multiple technologies, dispersed data, hundreds of integration points"</td>
+<td>CDO Magazine</td>
+</tr>
+<tr>
+<td><strong>Data Wrangling</strong></td>
+<td>Teams spent "disproportionate amount of time sourcing ERP data in multiple systems"</td>
+<td>CDO Magazine</td>
+</tr>
+<tr>
+<td><strong>Custom Build Failure</strong></td>
+<td>9 months into custom finance data hub, had to switch to Oracle</td>
+<td>CDO Magazine</td>
+</tr>
+<tr>
+<td><strong>Solution</strong></td>
+<td>Modernized with focus on omnichannel; standardized data governance</td>
+<td>CDO Magazine</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Case Relevance:</strong>
+- Lowe's faced similar "capability collision" challenges
+- Validates HD's problem is industry-wide, not company-specific
+- Lowe's solution: consolidation, standardization, semantic layer
+- HD's constraint: CEO won't allow centralization</p>
+<p><strong>Source:</strong> <a href="https://www.cdomagazine.tech/digital-transformation/lowes-data-transformation-playbook-how-a-retail-giant-is-modernizing-for-an-ai-first-future">CDO Magazine</a></p>
+<h3 id="agile-velocity-benchmarks">Agile Velocity Benchmarks</h3>
+<table>
+<thead>
+<tr>
+<th>Finding</th>
+<th>Value</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Universal Benchmark</strong></td>
+<td>Does NOT exist; velocity is team-specific</td>
+<td>Atlassian, Monday</td>
+</tr>
+<tr>
+<td><strong>Stabilization Period</strong></td>
+<td>3-5 sprints to stabilize</td>
+<td>Industry best practice</td>
+</tr>
+<tr>
+<td><strong>Sustainable Capacity Factor</strong></td>
+<td>0.8 × velocity + buffer</td>
+<td>Validated formula</td>
+</tr>
+<tr>
+<td><strong>Planning Accuracy Gain</strong></td>
+<td>+30% with outcome-based measurement</td>
+<td>Research</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Case Relevance:</strong>
+- Case shows 65% delivery rate for Magic Apron
+- Cannot compare to external benchmark (no universal standard)
+- Should compare to HD's own historical baseline
+- Focus on trend, not absolute number</p>
+<p><strong>Source:</strong> <a href="https://www.atlassian.com/agile/project-management/velocity-scrum">Atlassian</a>, <a href="https://monday.com/blog/rnd/agile-velocity/">Monday.com</a></p>
+<hr />
+<h2 id="13-research-gaps">13. Research Gaps</h2>
+<ul>
+<li>[ ] Exact engineering team sizes per product area (Magic Apron, Recs, Search, etc.)</li>
+<li>[ ] Mobile app download/MAU data</li>
+<li>[ ] Magic Apron usage metrics (sessions, queries, conversion impact)</li>
+<li>[ ] Orange Apron Media revenue (not disclosed)</li>
+<li>[ ] Search query volume and conversion rates</li>
+<li>[ ] Recommendation engine performance metrics</li>
+<li>[ ] Sidekick impact on inventory accuracy/associate productivity</li>
+</ul>
+<hr />
+<h2 id="sources">Sources</h2>
+<h3 id="tier-1-official">Tier 1 (Official)</h3>
+<ul>
+<li><a href="https://ir.homedepot.com/~/media/Files/H/HomeDepot-IR/2025/HD_2024_AR_IRsite_v2.pdf">Home Depot Annual Report 2024</a></li>
+<li><a href="https://ir.homedepot.com/news-releases/2024/06-18-2024-153031934">Home Depot IR - SRS Acquisition</a></li>
+<li><a href="https://corporate.homedepot.com/news/company/orange-apron-media-announces-new-comprehensive-self-service-ad-platform-orange-access">Home Depot Corporate - Orange Apron Media</a></li>
+<li><a href="https://www.orangeapronmedia.com/">Orange Apron Media</a></li>
+</ul>
+<h3 id="tier-2-trade-publications">Tier 2 (Trade Publications)</h3>
+<ul>
+<li><a href="https://www.supplychaindive.com/news/home-depot-distribution-delivery-speed-strategy/808125/">Supply Chain Dive - Delivery Speed</a></li>
+<li><a href="https://www.digitalcommerce360.com/article/home-depot-online-sales/">Digital Commerce 360 - Online Sales</a></li>
+<li><a href="https://www.pymnts.com/earnings/2025/home-depot-targets-450-billion-dollar-pro-market-with-digital-distribution-power/">PYMNTS - Pro Market</a></li>
+<li><a href="https://www.marketingdive.com/news/home-depot-orange-apron-retail-media-network-infronts/711240/">Marketing Dive - Orange Apron Media</a></li>
+<li><a href="https://chainstoreage.com/news-briefs/2025-05-14">Chain Store Age - J.D. Power</a></li>
+<li><a href="https://www.questionpro.com/blog/home-depot-nps/">QuestionPro - NPS</a></li>
+</ul>
+<h3 id="tier-3-estimates">Tier 3 (Estimates)</h3>
+<ul>
+<li><a href="https://www.similarweb.com/website/homedepot.com/">Similarweb - Traffic</a></li>
+<li><a href="https://www.statista.com/statistics/827086/number-of-customer-transactions-of-the-home-depot-worldwide/">Statista - Transactions</a></li>
+</ul>
+</main>
+
+<div class="footer">
+    Home Depot Case Study | UGA Terry College Case Competition 2026<br>
+    <small>Generated from <code>data-benchmarks.md</code></small>
+</div>
+
+<script>
+    function toggleSection(header) {
+        header.classList.toggle('active');
+        const content = header.nextElementSibling;
+        content.classList.toggle('active');
+    }
+
+    // Open all sections by default
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.section-header').forEach(function(header) {
+            header.classList.add('active');
+            header.nextElementSibling.classList.add('active');
+        });
+    });
+</script>
+
+</body>
+</html>

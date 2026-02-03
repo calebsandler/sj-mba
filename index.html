@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Depot Case Study - Document Index</title>
+    <style>
+        :root {
+            --hd-orange: #F96302;
+            --hd-black: #000000;
+            --hd-white: #FFFFFF;
+            --hd-gray-dark: #747474;
+            --hd-gray-medium: #C4C4C4;
+            --hd-gray-light: #F5F5F5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Helvetica Neue LT Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: var(--hd-white);
+            color: var(--hd-black);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            background: var(--hd-gray-light);
+            padding: 48px 32px;
+            margin: -24px -24px 32px -24px;
+            text-align: center;
+            border-bottom: 4px solid var(--hd-orange);
+        }
+
+        h1 {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: var(--hd-gray-dark);
+            font-size: 1.1em;
+        }
+
+        .tagline {
+            background: var(--hd-orange);
+            color: var(--hd-white);
+            display: inline-block;
+            padding: 8px 24px;
+            margin-top: 16px;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.01em;
+            margin: 32px 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--hd-orange);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .card {
+            background: var(--hd-white);
+            border: 1px solid var(--hd-gray-medium);
+            border-left: 4px solid var(--hd-orange);
+            padding: 20px;
+            text-decoration: none;
+            color: inherit;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+
+        .card h3 {
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.02em;
+            margin-bottom: 8px;
+            color: var(--hd-black);
+        }
+
+        .card p {
+            color: var(--hd-gray-dark);
+            font-size: 0.9em;
+            margin: 0;
+        }
+
+        .card.featured {
+            border-left-color: var(--hd-orange);
+            background: var(--hd-gray-light);
+        }
+
+        .card .badge {
+            display: inline-block;
+            background: var(--hd-orange);
+            color: var(--hd-white);
+            font-size: 0.7em;
+            padding: 2px 8px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-left: 8px;
+        }
+
+        .section-label {
+            display: inline-block;
+            background: var(--hd-black);
+            color: var(--hd-white);
+            padding: 4px 12px;
+            font-size: 0.8em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            margin-bottom: 16px;
+        }
+
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 2px solid var(--hd-gray-medium);
+            text-align: center;
+            color: var(--hd-gray-dark);
+            font-size: 0.85em;
+        }
+
+        .start-here {
+            background: var(--hd-black);
+            color: var(--hd-white);
+            padding: 24px;
+            margin: 24px 0;
+            text-align: center;
+        }
+
+        .start-here h3 {
+            color: var(--hd-orange);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .start-here a {
+            color: var(--hd-orange);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .start-here a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <h1>Home Depot Case Study</h1>
+    <p class="subtitle">UGA Terry College Case Competition 2026</p>
+    <div class="tagline">"When Digital Capabilities Collide"</div>
+</div>
+
+<div class="start-here">
+    <h3>Start Here</h3>
+    <p>
+        <a href="1-source/case-interactive.html">Visual Case Overview</a> — Interactive guide to the entire case
+    </p>
+</div>
+
+<h2>1. The Case</h2>
+<span class="section-label">1-source</span>
+<div class="card-grid">
+    <a href="1-source/case-interactive.html" class="card featured">
+        <h3>Case Interactive <span class="badge">Best Start</span></h3>
+        <p>Visual, interactive overview of the case with collapsible sections</p>
+    </a>
+    <a href="1-source/html/home-depot-case.html" class="card">
+        <h3>Full Case Text</h3>
+        <p>Complete case study with all exhibits and requirements</p>
+    </a>
+    <a href="1-source/html/case-breakdown.html" class="card">
+        <h3>Case Breakdown</h3>
+        <p>Plain language glossary and simplified explanation</p>
+    </a>
+</div>
+
+<h2>2. Our Analysis</h2>
+<span class="section-label">2-analysis</span>
+<div class="card-grid">
+    <a href="2-analysis/html/analysis-summary.html" class="card">
+        <h3>Analysis Summary</h3>
+        <p>Executive summary of the problem, stakeholders, and financial impact</p>
+    </a>
+    <a href="2-analysis/html/root-cause.html" class="card">
+        <h3>Root Cause</h3>
+        <p>Dave's three collisions framework and the core insight</p>
+    </a>
+</div>
+
+<h2>3. Research & Data</h2>
+<span class="section-label">3-research</span>
+<div class="card-grid">
+    <a href="3-research/html/findings-2026-02.html" class="card">
+        <h3>Research Findings</h3>
+        <p>Comprehensive external research on HD, competitors, and industry</p>
+    </a>
+    <a href="3-research/html/external-data.html" class="card">
+        <h3>External Data</h3>
+        <p>Quantitative data for financial modeling and benchmarks</p>
+    </a>
+</div>
+
+<h2>4. Our Solution</h2>
+<span class="section-label">4-solution</span>
+<div class="card-grid">
+    <a href="4-solution/html/proposal.html" class="card featured">
+        <h3>Solution Proposal <span class="badge">Main Deliverable</span></h3>
+        <p>The visibility layer concept, governance model, and success metrics</p>
+    </a>
+    <a href="4-solution/html/financial-analysis.html" class="card">
+        <h3>Financial Analysis</h3>
+        <p>3-year projections, ROI, cost-benefit model, and scenarios</p>
+    </a>
+    <a href="4-solution/html/technical-approach.html" class="card">
+        <h3>Technical Approach</h3>
+        <p>Architecture, event schema, collision detection rules, MVP scope</p>
+    </a>
+    <a href="4-solution/html/strategic-framing.html" class="card">
+        <h3>Strategic Framing</h3>
+        <p>Strategic thinking and initial framing of the solution</p>
+    </a>
+</div>
+
+<div class="footer">
+    Home Depot Case Study | UGA Terry College Case Competition 2026<br>
+    <small>Open <code>README.md</code> for navigation in markdown format</small>
+</div>
+
+</body>
+</html>

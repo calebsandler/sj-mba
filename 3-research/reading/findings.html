@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Findings: Home Depot Digital Coordination - Home Depot Case Study</title>
+    <style>
+        /* Home Depot FY25 Official Brand Colors */
+        :root {
+            --hd-orange: #F96302;
+            --hd-black: #000000;
+            --hd-white: #FFFFFF;
+            --hd-gray-dark: #747474;
+            --hd-gray-medium: #C4C4C4;
+            --hd-gray-light: #F5F5F5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Helvetica Neue LT Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: var(--hd-white);
+            color: var(--hd-black);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Headlines - Bold, ALL CAPS for major sections */
+        h1 {
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            color: var(--hd-black);
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+            border-bottom: 4px solid var(--hd-orange);
+            font-size: 1.8em;
+        }
+
+        h2 {
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            text-transform: uppercase;
+            color: var(--hd-black);
+            margin: 32px 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--hd-orange);
+            font-size: 1.3em;
+        }
+
+        h3 {
+            font-weight: 700;
+            color: var(--hd-black);
+            margin: 24px 0 12px;
+            font-size: 1.1em;
+        }
+
+        h4 {
+            font-weight: 700;
+            color: var(--hd-black);
+            margin: 16px 0 8px;
+            font-size: 1em;
+        }
+
+        p {
+            color: var(--hd-gray-dark);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        strong {
+            color: var(--hd-black);
+        }
+
+        a {
+            color: var(--hd-orange);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul, ol {
+            margin: 16px 0;
+            padding-left: 24px;
+            color: var(--hd-gray-dark);
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        li::marker {
+            color: var(--hd-orange);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--hd-gray-light);
+            color: var(--hd-black);
+            padding: 48px 32px;
+            margin: -24px -24px 32px -24px;
+            text-align: center;
+            border-bottom: 4px solid var(--hd-orange);
+        }
+
+        .hero h1 {
+            border-bottom: none;
+            font-size: 2em;
+            margin-bottom: 8px;
+            padding-bottom: 0;
+        }
+
+        .hero-subtitle {
+            font-size: 1em;
+            color: var(--hd-gray-dark);
+            margin-bottom: 16px;
+        }
+
+        .hero-date {
+            font-size: 0.85em;
+            color: var(--hd-gray-dark);
+        }
+
+        /* Navigation */
+        .nav {
+            position: sticky;
+            top: 0;
+            background: var(--hd-white);
+            padding: 12px 0;
+            margin-bottom: 24px;
+            z-index: 100;
+            border-bottom: 2px solid var(--hd-gray-medium);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--hd-black);
+            padding: 6px 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8em;
+            letter-spacing: 0.02em;
+            border: 1px solid transparent;
+        }
+
+        .nav-links a:hover {
+            background: var(--hd-orange);
+            color: var(--hd-white);
+            text-decoration: none;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--hd-gray-medium);
+        }
+
+        th {
+            background: var(--hd-black);
+            color: var(--hd-white);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 0.02em;
+        }
+
+        td {
+            color: var(--hd-gray-dark);
+        }
+
+        tr:hover {
+            background: var(--hd-gray-light);
+        }
+
+        /* Code blocks */
+        code {
+            background: var(--hd-gray-light);
+            padding: 2px 6px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.9em;
+            border: 1px solid var(--hd-gray-medium);
+        }
+
+        pre {
+            background: var(--hd-black);
+            color: var(--hd-white);
+            padding: 20px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border-left: 4px solid var(--hd-orange);
+        }
+
+        pre code {
+            background: none;
+            border: none;
+            padding: 0;
+            color: var(--hd-white);
+        }
+
+        /* TL;DR Box */
+        .tldr {
+            background: var(--hd-black);
+            color: var(--hd-white);
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .tldr h3 {
+            color: var(--hd-orange);
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+
+        .tldr p {
+            color: var(--hd-white);
+            margin-bottom: 8px;
+        }
+
+        .tldr strong {
+            color: var(--hd-orange);
+        }
+
+        /* Quote Box */
+        .quote {
+            background: var(--hd-gray-light);
+            border-left: 4px solid var(--hd-orange);
+            padding: 20px 24px;
+            margin: 24px 0;
+            font-style: italic;
+            color: var(--hd-gray-dark);
+        }
+
+        .quote-author {
+            font-style: normal;
+            font-weight: 700;
+            color: var(--hd-black);
+            margin-top: 12px;
+            font-size: 0.9em;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            font-size: 1.15em;
+            text-align: center;
+            padding: 24px;
+            background: var(--hd-gray-light);
+            border-left: 4px solid var(--hd-orange);
+            margin: 24px 0;
+        }
+
+        /* Metrics Display */
+        .metrics {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin: 24px 0;
+        }
+
+        .metric {
+            background: var(--hd-white);
+            padding: 24px 32px;
+            text-align: center;
+            border: 2px solid var(--hd-gray-medium);
+            min-width: 140px;
+            flex: 1;
+        }
+
+        .metric-value {
+            font-size: 2.4em;
+            font-weight: 700;
+            color: var(--hd-orange);
+        }
+
+        .metric-label {
+            font-size: 0.8em;
+            color: var(--hd-gray-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            margin-top: 4px;
+        }
+
+        /* Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .card {
+            background: var(--hd-white);
+            border-left: 4px solid var(--hd-orange);
+            padding: 20px 24px;
+            border-top: 1px solid var(--hd-gray-medium);
+            border-right: 1px solid var(--hd-gray-medium);
+            border-bottom: 1px solid var(--hd-gray-medium);
+        }
+
+        .card h4 {
+            color: var(--hd-black);
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.02em;
+            margin-top: 0;
+        }
+
+        .card p {
+            margin-bottom: 0;
+        }
+
+        .card.problem {
+            border-left-color: var(--hd-black);
+            background: var(--hd-gray-light);
+        }
+
+        .card.solution {
+            border-left-color: var(--hd-orange);
+        }
+
+        /* Flow Diagram */
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 24px;
+            background: var(--hd-gray-light);
+            margin: 24px 0;
+        }
+
+        .flow-box {
+            background: var(--hd-white);
+            border: 2px solid var(--hd-gray-medium);
+            padding: 12px 16px;
+            text-align: center;
+            min-width: 120px;
+            font-size: 0.9em;
+            color: var(--hd-black);
+        }
+
+        .flow-arrow {
+            font-size: 1.5em;
+            color: var(--hd-orange);
+            font-weight: 700;
+        }
+
+        .flow-result {
+            background: var(--hd-black);
+            color: var(--hd-white);
+            border-color: var(--hd-black);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+            margin: 24px 0;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--hd-orange);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 16px 0;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -26px;
+            top: 22px;
+            width: 14px;
+            height: 14px;
+            background: var(--hd-orange);
+        }
+
+        .timeline-item strong {
+            display: block;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.02em;
+            margin-bottom: 4px;
+            color: var(--hd-black);
+        }
+
+        .timeline-item p {
+            margin: 0;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            font-size: 0.8em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .badge-critical {
+            background: var(--hd-orange);
+            color: var(--hd-white);
+        }
+
+        .badge-high {
+            background: var(--hd-black);
+            color: var(--hd-white);
+        }
+
+        .badge-medium {
+            background: var(--hd-gray-light);
+            color: var(--hd-black);
+            border: 1px solid var(--hd-gray-dark);
+        }
+
+        .badge-low {
+            background: var(--hd-gray-light);
+            color: var(--hd-gray-dark);
+            border: 1px solid var(--hd-gray-medium);
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--hd-gray-medium);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .checklist li::before {
+            content: "";
+            display: block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--hd-orange);
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+
+        /* Constraints/Pills */
+        .constraints {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .constraint {
+            background: var(--hd-black);
+            color: var(--hd-white);
+            padding: 10px 20px;
+            font-weight: 700;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        /* Collapsible Sections */
+        .section {
+            margin: 24px 0;
+            border: 1px solid var(--hd-gray-medium);
+        }
+
+        .section-header {
+            background: var(--hd-black);
+            color: var(--hd-white);
+            padding: 16px 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .section-header:hover {
+            background: #1a1a1a;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            color: var(--hd-white);
+            font-size: 1em;
+            border: none;
+            padding: 0;
+        }
+
+        .section-header .toggle {
+            font-size: 1.5em;
+            font-weight: 700;
+            transition: transform 0.3s;
+        }
+
+        .section-header.active .toggle {
+            transform: rotate(45deg);
+        }
+
+        .section-content {
+            padding: 24px;
+            display: none;
+            background: var(--hd-white);
+        }
+
+        .section-content.active {
+            display: block;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 2px solid var(--hd-gray-medium);
+            text-align: center;
+            color: var(--hd-gray-dark);
+            font-size: 0.85em;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                padding: 0;
+            }
+            .nav, .section-header .toggle {
+                display: none;
+            }
+            .section-content {
+                display: block !important;
+            }
+            .hero {
+                margin: 0 0 24px 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 16px;
+            }
+
+            .hero {
+                padding: 32px 16px;
+                margin: -16px -16px 24px -16px;
+            }
+
+            .flow-diagram {
+                flex-direction: column;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+
+            .metrics {
+                flex-direction: column;
+            }
+
+            .metric {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <h1>Research Findings: Home Depot Digital Coordination</h1>
+    <p class="hero-subtitle">Research Date:** February 2026</p>
+    <p class="hero-date">Generated: February 03, 2026</p>
+</div>
+
+<nav class="nav">
+    <div class="nav-links">
+        <a href="#1-home-depot-leadership-organization">1. Home Depot Leadership & Organization</a>
+<a href="#2-magic-apron-ai-home-depot">2. Magic Apron AI (Home Depot)</a>
+<a href="#3-home-depot-product-teams-deep-dive">3. Home Depot Product Teams Deep Dive</a>
+<a href="#4-lowe-s-mylow-ai-competitor">4. Lowe's Mylow AI (Competitor)</a>
+<a href="#4-financial-operational-data">4. Financial & Operational Data</a>
+<a href="#5-customer-satisfaction-benchmarks">5. Customer Satisfaction Benchmarks</a>
+<a href="#6-team-topologies-framework-applicable-to-case">6. Team Topologies Framework (Applicable to Case)</a>
+<a href="#7-competitive-positioning-summary">7. Competitive Positioning Summary</a>
+<a href="#8-amazon-two-pizza-teams-model">8. Amazon Two-Pizza Teams Model</a>
+<a href="#9-walmart-omnichannel-organization">9. Walmart Omnichannel Organization</a>
+    </div>
+</nav>
+
+<main>
+<h1 id="research-findings-home-depot-digital-coordination">Research Findings: Home Depot Digital Coordination</h1>
+<blockquote>
+<p><strong>Research Date:</strong> February 2026
+<strong>Sources:</strong> Web search, corporate filings, industry publications</p>
+</blockquote>
+<hr />
+<h2 id="1-home-depot-leadership-organization">1. Home Depot Leadership &amp; Organization</h2>
+<h3 id="cio-transition-2025">CIO Transition (2025)</h3>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>New CIO</strong></td>
+<td>Angie Brown</td>
+<td>Promoted May 2025; 27-year HD veteran</td>
+</tr>
+<tr>
+<td><strong>Former CIO</strong></td>
+<td>Fahim Siddiqui</td>
+<td>Led team of 8,500+ technologists</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Source:</strong> <a href="https://www.ciodive.com/news/home-depot-cio-appointment-angie-brown/749444/">CIO Dive</a>, <a href="https://ir.homedepot.com/news-releases/2025/05-29-2025-222258117">Home Depot IR</a></p>
+<p><strong>Key Quote:</strong> Under Siddiqui, HD "modernised platforms, doubled e-commerce revenue, integrated AI and machine learning into customer experiences."</p>
+<h3 id="technology-team-scale">Technology Team Scale</h3>
+<ul>
+<li><strong>8,500+ technologists</strong> (per Siddiqui's LinkedIn departure post)</li>
+<li><strong>~$4B annual ICT spending</strong> (2024 estimate)</li>
+<li><strong>$4B planned CapEx for FY2025</strong> including technology investments</li>
+</ul>
+<p><strong>Source:</strong> <a href="https://nationalcioreview.com/articles-insights/cio-field-notes/home-depot-fills-the-bucket-with-ai-and-digital-tools/">National CIO Review</a></p>
+<hr />
+<h2 id="2-magic-apron-ai-home-depot">2. Magic Apron AI (Home Depot)</h2>
+<h3 id="launch-architecture">Launch &amp; Architecture</h3>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Launch Date</strong></td>
+<td>March 6, 2025</td>
+</tr>
+<tr>
+<td><strong>Architecture</strong></td>
+<td>RAG (Retrieval-Augmented Generation) on proprietary data</td>
+</tr>
+<tr>
+<td><strong>Foundation</strong></td>
+<td>Google Cloud Gemini models, Vertex AI</td>
+</tr>
+<tr>
+<td><strong>Training Data</strong></td>
+<td>Proprietary project expertise + product catalog + web scraping</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Source:</strong> <a href="https://corporate.homedepot.com/news/company/unveiling-magic-apron-home-depots-smartest-tool-yet">Home Depot Corporate</a>, <a href="https://www.prnewswire.com/news-releases/the-home-depot-introduces-magic-apron-a-suite-of-advanced-ai-tools-to-help-customers-with-their-home-improvement-needs-302393862.html">PR Newswire</a></p>
+<h3 id="capabilities">Capabilities</h3>
+<ul>
+<li>Chat bar on millions of product pages</li>
+<li>Project advice in plain language</li>
+<li>Product review summarization</li>
+<li><strong>Pro feature (Beta Nov 2025):</strong> Voice/text materials list generation for contractors</li>
+</ul>
+<h3 id="business-impact">Business Impact</h3>
+<ul>
+<li><strong>"Strong customer engagement, contributing to growth in online conversion"</strong> — Q1 2025 earnings call</li>
+</ul>
+<p><strong>Source:</strong> <a href="https://www.digitalcommerce360.com/2025/11/06/how-home-depot-is-using-ai/">Digital Commerce 360</a></p>
+<h3 id="ai-scale-at-home-depot">AI Scale at Home Depot</h3>
+<ul>
+<li><strong>175+ ML and generative AI use cases</strong> piloted by mid-2024</li>
+<li><strong>Sidekick app:</strong> Computer vision for in-store task prioritization</li>
+<li><strong>Google Cloud partnership</strong> extended for AI/ML, inventory, supply chain</li>
+</ul>
+<hr />
+<h2 id="3-home-depot-product-teams-deep-dive">3. Home Depot Product Teams Deep Dive</h2>
+<h3 id="31-pro-xtra-b2b-experience">3.1 Pro Xtra &amp; B2B Experience</h3>
+<p><strong>Target Market:</strong>
+- Pros = ~10% of customer base but <strong>~50% of sales</strong>
+- Target addressable market: <strong>$450 billion</strong></p>
+<p><strong>Source:</strong> <a href="https://www.pymnts.com/earnings/2025/home-depot-targets-450-billion-dollar-pro-market-with-digital-distribution-power/">PYMNTS</a></p>
+<p><strong>Key 2024 Acquisition:</strong>
+- <strong>SRS Distribution</strong> — $18.3B acquisition (closed June 2024)
+- Added 780+ branches in roofing, landscaping, specialty building supplies</p>
+<p><strong>Pro Xtra Loyalty Tiers:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Benefits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Member</strong></td>
+<td>Base rewards, order tracking, shopping lists</td>
+</tr>
+<tr>
+<td><strong>Elite</strong></td>
+<td>Priority support, preferred pricing</td>
+</tr>
+<tr>
+<td><strong>VIP</strong></td>
+<td>Dedicated account management, exclusive experiences</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Digital Capabilities:</strong>
+- Pro Online Experience: order history, reusable lists, multiple shipping addresses
+- Trade credit accounts showing <strong>double-digit lift in spend</strong> once activated
+- B2B website with more functionality coming 2026</p>
+<p><strong>Key Quote:</strong> "These investments have driven over $1 billion in incremental sales on an annualized basis in 17 markets." — Ann-Marie Campbell, SVP</p>
+<p><strong>Source:</strong> <a href="https://www.digitalcommerce360.com/2025/08/20/why-home-depot-will-focus-on-digital-b2b-expansion/">Digital Commerce 360</a>, <a href="https://hbsdealer.com/inside-home-depots-play-pros">HBS Dealer</a></p>
+<hr />
+<h3 id="32-orange-apron-media-retail-media-network">3.2 Orange Apron Media (Retail Media Network)</h3>
+<p><strong>History:</strong>
+- Originally launched as "Retail Media+" in 2018
+- Rebranded to <strong>Orange Apron Media</strong> in March 2024</p>
+<p><strong>Reach:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Individual customers</strong></td>
+<td>198M</td>
+</tr>
+<tr>
+<td><strong>Stores</strong></td>
+<td>2,340</td>
+</tr>
+<tr>
+<td><strong>Annual website visits</strong></td>
+<td>3.5B</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ad Placements:</strong>
+- Top-of-page banners on HomeDepot.com
+- Sponsored product carousels
+- Filtering grid placements
+- Promotional emails
+- In-store TV screens (100 stores)</p>
+<p><strong>Performance:</strong>
+- Advertisers receive <strong>≥2x ROAS</strong> (return on ad spend)
+- Shoppers spend <strong>28% more per visit</strong> after clicking ads
+- <strong>26% higher conversion</strong> for ad-engaged shoppers
+- "Orange Halo Effect": <strong>+36% purchase intent</strong>, <strong>+75% ad recall</strong> on Meta</p>
+<p><strong>October 2024: Orange Access Platform</strong>
+- Self-service ad platform powered by Vantage
+- Unified on-site, off-site, and in-store ad units
+- Enables small suppliers (1-3 products) to buy ads</p>
+<p><strong>Growth Target:</strong> Double supplier advertiser base from "a few thousand" to several thousand more</p>
+<p><strong>Key Quote:</strong> "We have thousands of small suppliers who may only have one to three products… and they don't know anything about how to buy an ad, so we have to help them succeed inside of Home Depot." — Melanie Babcock, VP</p>
+<p><strong>Source:</strong> <a href="https://ir.homedepot.com/news-releases/2024/10-03-2024-150051692">Home Depot IR</a>, <a href="https://www.marketingdive.com/news/home-depot-orange-apron-retail-media-network-infronts/711240/">Marketing Dive</a>, <a href="https://www.digitalcommerce360.com/2024/10/04/home-depot-orange-apron-retail-media-network-self-service-platform/">Digital Commerce 360</a></p>
+<hr />
+<h3 id="33-supply-chain-delivery">3.3 Supply Chain &amp; Delivery</h3>
+<p><strong>Delivery Speed Transformation:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>2022</th>
+<th>2025</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Same/next-day delivery (in-stock SKUs)</strong></td>
+<td>~18%</td>
+<td><strong>55%</strong> (3x improvement)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Infrastructure:</strong>
+- 20 direct fulfillment centers (light SKUs, close to customers)
+- 17 flatbed distribution centers (lumber, building materials)
+- Network "essentially completed" per CFO Richard McPhail</p>
+<p><strong>Key Technologies:</strong>
+1. <strong>"Ship from Best Location" Algorithm</strong> — Analyzes customer profile, geography, assets, inventory to determine optimal fulfillment
+2. <strong>ML-powered store vs. DC routing</strong> — Determines whether to ship from store or fulfillment center
+3. <strong>Dedicated fulfillment associates</strong> with prioritization app</p>
+<p><strong>Extended Aisle Improvement:</strong>
+- Previously: 5-9 days for non-stocked items
+- Now: <strong>50%+ of extended aisle deliveries in 1-2 days</strong></p>
+<p><strong>2025 Partnerships:</strong>
+- DoorDash and Uber Eats for on-demand delivery (January 2025)</p>
+<p><strong>Results:</strong>
+- <strong>+4% increase in customer satisfaction</strong> from faster delivery
+- 2025 expected to be "highest year ever for delivery customer satisfaction"</p>
+<p><strong>Source:</strong> <a href="https://www.supplychaindive.com/news/home-depot-distribution-delivery-speed-strategy/808125/">Supply Chain Dive</a>, <a href="https://www.digitalcommerce360.com/2025/12/17/home-depot-touts-25-billion-ecommerce-business-and-ai-driven-delivery/">Digital Commerce 360</a></p>
+<hr />
+<h3 id="34-sidekick-associate-app">3.4 Sidekick (Associate App)</h3>
+<p><strong>Overview:</strong> Homegrown ML-powered app on hdPhones for store associates</p>
+<p><strong>Core Capabilities:</strong>
+- <strong>Task prioritization</strong> — ML algorithm determines which tasks are actionable and when
+- <strong>Machine vision</strong> — Detects out-of-stock products, locates items in store
+- <strong>Common tasking engine</strong> — Alerts specific associates to priority tasks
+- <strong>Dashboard views</strong> — Separate views for associates and managers</p>
+<p><strong>Inventory Management:</strong>
+- Real-time stock level monitoring
+- Product location intelligence
+- Replenishment alerts
+- Predictive stockout detection</p>
+<p><strong>2024 Enhancement: Pipeline Management</strong>
+- Consolidated digital view of customer activity for kitchen design projects
+- Helps manage complex Pro projects end-to-end</p>
+<p><strong>Deployment:</strong> Rolled out January 2023, now in 600+ stores</p>
+<p><strong>Source:</strong> <a href="https://corporate.homedepot.com/news/company/home-depot-launches-new-store-application-help-associates-provide-better-customer">Home Depot Corporate</a>, <a href="https://www.customerexperiencedive.com/news/home-depot-associates-professional-customers-sidekick/724136/">CX Dive</a></p>
+<hr />
+<h3 id="35-search-personalization-engine">3.5 Search &amp; Personalization Engine</h3>
+<p><strong>Intent Search Platform:</strong>
+- Focuses on <strong>understanding intent</strong>, not literal keywords
+- Handles geographic terminology differences (e.g., "weed whacker" vs. "string trimmer")
+- Learning algorithm improves with ongoing search data</p>
+<p><strong>Personalization Factors:</strong>
+- Location
+- Past searches
+- Personalized deals
+- Guide recommendations
+- Unified customer profiles (physical + digital + loyalty data)</p>
+<p><strong>Results:</strong>
+- Higher click-through rates
+- Better conversion
+- Increased revenue per search</p>
+<p><strong>Source:</strong> <a href="https://corporate.homedepot.com/news/products/home-depot-introduces-improved-search-all">Home Depot Corporate</a>, <a href="https://www.klover.ai/home-depot-uses-ai-agents-10-ways-to-use-ai-in-depth-analysis-2025/">Klover.ai</a></p>
+<hr />
+<h3 id="36-mobile-app">3.6 Mobile App</h3>
+<p><strong>HD Pass Digital Wallet (October 2025):</strong>
+- Scan QR codes at checkout
+- Link purchases to rewards account
+- Apply personalized offers
+- Track spending and rewards
+- Mobile payment</p>
+<p><strong>Core Features:</strong>
+- BOPIS (Buy Online Pickup In Store)
+- Curbside Pickup
+- In-store product location via store map
+- Barcode lookup
+- Key cutting, tool rental, propane exchange services
+- Gift card balance checks</p>
+<p><strong>App Stats:</strong>
+- APK size: 78.60 MB
+- Latest version: 7.55 (Nov 2025)</p>
+<p><strong>Source:</strong> <a href="https://hardwareretailing.com/home-depot-launches-new-mobile-app-wallet-feature/">Hardware Retailing</a></p>
+<hr />
+<h3 id="37-one-home-depot-strategy">3.7 "One Home Depot" Strategy</h3>
+<p><strong>Vision:</strong> "Provide an interconnected, frictionless shopping experience that enables customers to seamlessly blend the digital and physical worlds."</p>
+<p><strong>Key Pillars:</strong>
+1. Connect all stores with customer-facing digital apps
+2. Enable smartphone-based product info, comparison, purchase, staff communication
+3. AI for inventory management and e-commerce growth
+4. Unified customer profiles across channels</p>
+<p><strong>Investment:</strong>
+- <strong>$4B annual ICT spending</strong> (2024)
+- <strong>$150M venture capital fund</strong> (Home Depot Ventures, est. 2022) for early/growth-stage retail tech</p>
+<p><strong>Infrastructure:</strong>
+- 2,347 retail stores (U.S., Canada, Mexico) as of FY2024
+- New distribution centers in Detroit and Los Angeles (2024-2025)</p>
+<p><strong>Source:</strong> <a href="https://corporate.homedepot.com/news/company/home-depot-details-progress-transformational-one-home-depot-strategy-extend-market">Home Depot Corporate</a></p>
+<hr />
+<h2 id="4-lowes-mylow-ai-competitor">4. Lowe's Mylow AI (Competitor)</h2>
+<h3 id="launch-architecture_1">Launch &amp; Architecture</h3>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Launch Date</strong></td>
+<td>March 5, 2025 (one day before Magic Apron)</td>
+</tr>
+<tr>
+<td><strong>Partner</strong></td>
+<td>OpenAI (ChatGPT)</td>
+</tr>
+<tr>
+<td><strong>Expansion</strong></td>
+<td>Mylow Companion for associates (May 2025)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Source:</strong> <a href="https://corporate.lowes.com/newsroom/press-releases/lowes-launches-first-ai-powered-home-improvement-virtual-advisor-03-05-25">Lowe's Corporate</a>, <a href="https://openai.com/index/lowes/">OpenAI</a></p>
+<h3 id="business-impact_1">Business Impact</h3>
+<ul>
+<li><strong>2x conversion rate</strong> for shoppers using Mylow vs. non-users</li>
+<li><strong>+200 bps customer satisfaction</strong> when associates use Mylow Companion</li>
+<li><strong>100B token milestone</strong> with OpenAI</li>
+<li>Projected <strong>$12.17B online sales in 2025</strong></li>
+</ul>
+<p><strong>Key Quote:</strong> "What makes Mylow powerful is it understands intent. Most people don't come to our site with a product in mind. They come with a problem." — Joe Cano, SVP Digital Commerce</p>
+<p><strong>Source:</strong> <a href="https://www.modernretail.co/technology/lowes-wants-to-do-more-with-ai-shopping-in-2026/">Modern Retail</a>, <a href="https://www.digitalcommerce360.com/2025/11/20/lowes-ai-ecommerce-2026-growth/">Digital Commerce 360</a></p>
+<hr />
+<h2 id="4-financial-operational-data">4. Financial &amp; Operational Data</h2>
+<h3 id="home-depot-fy2024">Home Depot FY2024</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Total Revenue</strong></td>
+<td>$159.5B</td>
+<td>Annual Report</td>
+</tr>
+<tr>
+<td><strong>Online Sales</strong></td>
+<td>~$21B</td>
+<td>Digital Commerce 360</td>
+</tr>
+<tr>
+<td><strong>Online % of Total</strong></td>
+<td>~13-14%</td>
+<td>Calculated</td>
+</tr>
+<tr>
+<td><strong>Comparable Sales</strong></td>
+<td>-1.8% YoY</td>
+<td>Annual Report</td>
+</tr>
+<tr>
+<td><strong>Q3 Online Growth</strong></td>
+<td>+11% YoY</td>
+<td>Earnings</td>
+</tr>
+<tr>
+<td><strong>B2B Incremental Sales</strong></td>
+<td>$1B+ annually (17 markets)</td>
+<td>Digital Commerce 360</td>
+</tr>
+<tr>
+<td><strong>SRS Acquisition</strong></td>
+<td>780+ branches</td>
+<td>Annual Report</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Source:</strong> <a href="https://ir.homedepot.com/~/media/Files/H/HomeDepot-IR/2025/HD_2024_AR_IRsite_v2.pdf">Home Depot Annual Report 2024</a>, <a href="https://www.digitalcommerce360.com/2025/03/04/home-depot-1-billion-b2b-sales-q4-2024/">Digital Commerce 360</a></p>
+<h3 id="bopis-buy-online-pickup-in-store">BOPIS (Buy Online Pickup In Store)</h3>
+<ul>
+<li><strong>~50% of online orders</strong> fulfilled through stores</li>
+</ul>
+<hr />
+<h2 id="5-customer-satisfaction-benchmarks">5. Customer Satisfaction Benchmarks</h2>
+<h3 id="nps-scores-q1-2025">NPS Scores (Q1 2025)</h3>
+<table>
+<thead>
+<tr>
+<th>Company</th>
+<th>NPS</th>
+<th>vs. Industry Avg (37)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Home Depot</strong></td>
+<td>43</td>
+<td>+6</td>
+</tr>
+<tr>
+<td><strong>Lowe's</strong></td>
+<td>29</td>
+<td>-8</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Source:</strong> <a href="https://www.questionpro.com/blog/home-depot-nps/">QuestionPro</a></p>
+<h3 id="jd-power-customer-satisfaction-2025">J.D. Power Customer Satisfaction (2025)</h3>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Company</th>
+<th>Score (out of 1000)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Lowe's</td>
+<td>680</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Ace Hardware</td>
+<td>672</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Menards</td>
+<td>669</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Home Depot</strong></td>
+<td>641</td>
+</tr>
+<tr>
+<td>—</td>
+<td>Industry Average</td>
+<td>671</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Insight:</strong> Despite market leadership, Home Depot trails Lowe's by 39 points on J.D. Power satisfaction.</p>
+<p><strong>Source:</strong> <a href="https://chainstoreage.com/news-briefs/2025-05-14">Chain Store Age</a></p>
+<hr />
+<h2 id="6-team-topologies-framework-applicable-to-case">6. Team Topologies Framework (Applicable to Case)</h2>
+<h3 id="core-concepts-for-capability-collision-problem">Core Concepts for Capability Collision Problem</h3>
+<table>
+<thead>
+<tr>
+<th>Team Type</th>
+<th>Role</th>
+<th>HD Application</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Stream-aligned</strong></td>
+<td>End-to-end product ownership</td>
+<td>Magic Apron, Recommendations, Search, etc.</td>
+</tr>
+<tr>
+<td><strong>Platform</strong></td>
+<td>Shared capabilities, reduces cognitive load</td>
+<td>Proposed "Event Streaming Layer"</td>
+</tr>
+<tr>
+<td><strong>Enabling</strong></td>
+<td>Helps teams adopt new practices</td>
+<td>Governance/architecture teams</td>
+</tr>
+<tr>
+<td><strong>Complicated-subsystem</strong></td>
+<td>Deep specialization</td>
+<td>Inventory system, Pricing engine</td>
+</tr>
+</tbody>
+</table>
+<h3 id="interaction-modes">Interaction Modes</h3>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Description</th>
+<th>When to Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Collaboration</strong></td>
+<td>High-bandwidth, high-cost joint work</td>
+<td>Building new shared capabilities</td>
+</tr>
+<tr>
+<td><strong>X-as-a-Service</strong></td>
+<td>Clear boundaries, low coordination</td>
+<td>Steady-state platform consumption</td>
+</tr>
+<tr>
+<td><strong>Facilitating</strong></td>
+<td>Temporary help removing obstacles</td>
+<td>Onboarding teams to new patterns</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Insight:</strong> Platform teams should aim for <strong>X-as-a-Service</strong> as default mode (low coordination overhead) while using <strong>Collaboration</strong> mode only when developing new capabilities.</p>
+<p><strong>Case Application:</strong> HD's collision problem = too much implicit collaboration without explicit interfaces. Solution = create explicit platform (event stream) with X-as-a-Service consumption model.</p>
+<p><strong>Source:</strong> <a href="https://teamtopologies.com/key-concepts">Team Topologies</a>, <a href="https://martinfowler.com/bliki/TeamTopologies.html">Martin Fowler</a>, <a href="https://itrevolution.com/articles/four-team-types/">IT Revolution</a></p>
+<hr />
+<h2 id="7-competitive-positioning-summary">7. Competitive Positioning Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Home Depot</th>
+<th>Lowe's</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AI Partner</strong></td>
+<td>Google Cloud (Gemini)</td>
+<td>OpenAI (ChatGPT)</td>
+</tr>
+<tr>
+<td><strong>AI Launch</strong></td>
+<td>Magic Apron (Mar 6)</td>
+<td>Mylow (Mar 5)</td>
+</tr>
+<tr>
+<td><strong>NPS</strong></td>
+<td>43 (above avg)</td>
+<td>29 (below avg)</td>
+</tr>
+<tr>
+<td><strong>J.D. Power</strong></td>
+<td>641 (#4)</td>
+<td>680 (#1)</td>
+</tr>
+<tr>
+<td><strong>Online Sales</strong></td>
+<td>~$21B</td>
+<td>~$12B (projected)</td>
+</tr>
+<tr>
+<td><strong>AI Scale</strong></td>
+<td>175+ use cases</td>
+<td>100B tokens with OpenAI</td>
+</tr>
+<tr>
+<td><strong>Pro Focus</strong></td>
+<td>Heavy (SRS acquisition, B2B)</td>
+<td>Moderate</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="8-amazon-two-pizza-teams-model">8. Amazon Two-Pizza Teams Model</h2>
+<h3 id="organizational-philosophy">Organizational Philosophy</h3>
+<p>Amazon's "two-pizza teams" (2PTs) represent an extreme divisional organization:
+- <strong>Size:</strong> 6-10 people (small enough to feed with two pizzas)
+- <strong>Autonomy:</strong> Teams are free to execute relatively autonomously to maximize their "fitness function"
+- <strong>Structure:</strong> Engineers, technical PMs, designers report directly to 2PT lead
+- <strong>Coordination:</strong> "No need to coordinate even across teams, let alone across divisions, to get something done"</p>
+<p><strong>Source:</strong> <a href="https://jasoncrawford.org/two-pizza-teams">Jason Crawford</a>, <a href="https://aws.amazon.com/executive-insights/content/amazon-two-pizza-team/">AWS Executive Insights</a></p>
+<h3 id="governance-model">Governance Model</h3>
+<p>Amazon uses <strong>"guardrails" rather than "tollgates"</strong>:
+- Guardrails = mechanisms that allow teams to run fast while making high-quality decisions
+- Tollgates = approval gates that impede speed</p>
+<p><strong>Case Relevance:</strong> HD's challenge is similar — how to provide guardrails (visibility, shared data) without tollgates (centralized approval).</p>
+<hr />
+<h2 id="9-walmart-omnichannel-organization">9. Walmart Omnichannel Organization</h2>
+<h3 id="strategic-identity">Strategic Identity</h3>
+<p>CEO Doug McMillon's framing: <strong>"People-led, tech-powered omnichannel retailer"</strong>
+- Prioritize associates, values, culture
+- Put impactful technology to work to strengthen customer experience</p>
+<p><strong>Source:</strong> <a href="https://www.grocerydoppio.com/articles/walmart-2024-25-a-six-pillar-roadmap-to-digital-retail-dominance">Grocery Doppio</a></p>
+<h3 id="digital-performance-2024">Digital Performance (2024)</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Global eCommerce Sales</strong></td>
+<td>$100B+</td>
+</tr>
+<tr>
+<td><strong>U.S. eCommerce Growth</strong></td>
+<td>Double-digit for 6 consecutive quarters</td>
+</tr>
+<tr>
+<td><strong>Seller Growth</strong></td>
+<td>+20% YoY</td>
+</tr>
+<tr>
+<td><strong>Online Grocery Fulfillment</strong></td>
+<td>50%+ fulfilled by local stores</td>
+</tr>
+<tr>
+<td><strong>InHome Delivery</strong></td>
+<td>45M households, 50 markets</td>
+</tr>
+</tbody>
+</table>
+<h3 id="walmart-global-tech">Walmart Global Tech</h3>
+<ul>
+<li>Award-winning team: software engineers, data scientists, product managers, cybersecurity experts</li>
+<li>Focus: "Drive innovations that impact millions of lives globally"</li>
+</ul>
+<p><strong>Source:</strong> <a href="https://tech.walmart.com/content/walmart-global-tech/en_us.html">Walmart Global Tech</a></p>
+<h3 id="ai-operating-framework">AI Operating Framework</h3>
+<p>Walmart uses <strong>"Eliminate, Automate, Optimize"</strong> framework:
+1. <strong>Eliminate</strong> — Check if process is even necessary before automating
+2. <strong>Automate</strong> — Apply AI to essential but repetitive tasks
+3. <strong>Optimize</strong> — Continuous improvement</p>
+<p><strong>Example:</strong> Invoice processing automation freed hundreds of employees for higher-value work.</p>
+<h3 id="cost-efficiency-target">Cost Efficiency Target</h3>
+<ul>
+<li><strong>~20% reduction in fulfillment costs</strong> through supply chain/automation initiatives</li>
+</ul>
+<p><strong>Source:</strong> <a href="https://www.homepagenews.com/featured-news/special-report-inside-walmarts-omnichannel-evolution-toward-a-tech-driven-future/">HomePage News</a></p>
+<hr />
+<h2 id="10-mckinsey-ai-governance-framework-2024-2025">10. McKinsey AI Governance Framework (2024-2025)</h2>
+<h3 id="current-state-of-ai-governance">Current State of AI Governance</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Finding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AI Adoption</strong></td>
+<td>88%+ of organizations use AI in at least one function</td>
+</tr>
+<tr>
+<td><strong>Board Oversight</strong></td>
+<td>Only 39% of Fortune 100 disclose any board AI oversight</td>
+</tr>
+<tr>
+<td><strong>Board-Approved Policies</strong></td>
+<td>&lt;25% have structured, board-approved AI policies</td>
+</tr>
+<tr>
+<td><strong>Governance Ownership</strong></td>
+<td>CEO most common; avg. 2 leaders share responsibility</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Source:</strong> <a href="https://www.mckinsey.com/capabilities/mckinsey-technology/our-insights/the-ai-reckoning-how-boards-can-evolve">McKinsey - Elevating Board Governance</a></p>
+<h3 id="mckinsey-recommendations">McKinsey Recommendations</h3>
+<ol>
+<li><strong>Define decision tiers:</strong></li>
+<li>Full board: Material investments to scale enterprise-wide AI</li>
+<li>Committee: Risk frameworks, vendor reviews</li>
+<li>
+<p>No board discussion: Operational decisions</p>
+</li>
+<li>
+<p><strong>Quantify trade-offs:</strong> Management should quantify (not just identify) AI opportunities AND risks</p>
+</li>
+<li>
+<p><strong>Govern for safety AND speed:</strong></p>
+</li>
+<li>Establish approvals matrix by risk tier</li>
+<li>Pre-approve tools/datasets</li>
+<li>Log prompts and outputs</li>
+<li>Define rollback procedures</li>
+</ol>
+<p><strong>Source:</strong> <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai">McKinsey State of AI 2025</a></p>
+<h3 id="agentic-ai-governance">Agentic AI Governance</h3>
+<p>For organizations with AI agents:</p>
+<blockquote>
+<p>"Governance cannot remain a periodic, paper-heavy exercise. As agents operate continuously, governance must become <strong>real-time, data-driven, and embedded</strong> — with humans holding final accountability."</p>
+</blockquote>
+<p><strong>Source:</strong> <a href="https://www.mckinsey.com/capabilities/risk-and-resilience/our-insights/deploying-agentic-ai-with-safety-and-security-a-playbook-for-technology-leaders">McKinsey - Agentic AI Security</a></p>
+<h3 id="risk-mitigation-trends">Risk Mitigation Trends</h3>
+<ul>
+<li><strong>2022:</strong> Organizations mitigated avg. 2 AI-related risks</li>
+<li><strong>2024:</strong> Organizations mitigate avg. 4 AI-related risks</li>
+<li>Growing focus on: privacy, explainability, reputation, regulatory compliance</li>
+</ul>
+<h3 id="value-of-ai-savvy-governance">Value of AI-Savvy Governance</h3>
+<p>MIT Study (2025): Organizations with digitally/AI-savvy boards outperform peers by <strong>+10.9 percentage points</strong> in return on equity.</p>
+<p><strong>Source:</strong> <a href="https://www.knostic.ai/blog/ai-governance-statistics">Knostic AI Governance Statistics</a></p>
+<hr />
+<h2 id="11-gartner-retail-ai-insights-2024-2025">11. Gartner Retail &amp; AI Insights (2024-2025)</h2>
+<h3 id="retail-cio-priorities-2024">Retail CIO Priorities (2024)</h3>
+<p>Top priority: <strong>"Successful execution of a unified commerce strategy for revenue and margin growth"</strong></p>
+<p>Funding focused on:
+- Game-changing AI
+- In-store technologies
+- Cloud and analytics</p>
+<p><strong>Source:</strong> <a href="https://www.gartner.com/en/industries/retail-digital-transformation">Gartner Retail Digital Transformation</a></p>
+<h3 id="agentic-ai-prediction">Agentic AI Prediction</h3>
+<blockquote>
+<p>By 2028, at least <strong>15% of day-to-day work decisions</strong> will be made autonomously through agentic AI (up from 0% in 2024).</p>
+</blockquote>
+<p><strong>Source:</strong> <a href="https://www.microsoft.com/en-us/dynamics-365/blog/business-leader/2025/11/06/microsoft-is-named-a-leader-in-2025-gartner-magic-quadrant-for-crm-customer-engagement-center/">Gartner via Microsoft</a></p>
+<hr />
+<h2 id="12-research-gaps-remaining">12. Research Gaps Remaining</h2>
+<ul>
+<li>[ ] Exact engineering team sizes per product vertical (Magic Apron, Recs, Search, etc.)</li>
+<li>[ ] Internal coordination tools/processes currently in use at HD</li>
+<li>[ ] Specific redundancy rate data (% duplicate effort across teams)</li>
+<li>[x] ~~Amazon/Walmart coordination approaches~~ ✓ Added</li>
+<li>[x] ~~McKinsey/Gartner AI governance frameworks~~ ✓ Added</li>
+<li>[ ] Customer verbatims on cross-channel friction (beyond J.D. Power scores)</li>
+<li>[ ] Lowe's organizational structure details</li>
+</ul>
+<hr />
+<h2 id="9-key-quotes-for-presentation">9. Key Quotes for Presentation</h2>
+<blockquote>
+<p>"Home improvement is inherently complex and can feel overwhelming even for the most experienced DIYer – that's why Lowe's has invested in AI and emerging technologies to create solutions that truly help our customers."
+— Seemantini Godbole, Lowe's Chief Digital and Information Officer</p>
+<p>"What makes Mylow powerful is it understands intent. Most people don't come to our site with a product in mind. They come with a problem."
+— Joe Cano, Lowe's SVP Digital Commerce</p>
+<p>"When our customers engage with Mylow online, the conversion rate more than doubles."
+— Lowe's earnings commentary</p>
+</blockquote>
+<hr />
+<h2 id="sources-index">Sources Index</h2>
+<h3 id="home-depot-corporate-ir-tier-1">Home Depot — Corporate &amp; IR (Tier 1)</h3>
+<ul>
+<li><a href="https://ir.homedepot.com/news-releases/2025/05-29-2025-222258117">CIO Angie Brown Appointment</a></li>
+<li><a href="https://corporate.homedepot.com/news/company/unveiling-magic-apron-home-depots-smartest-tool-yet">Magic Apron Launch</a></li>
+<li><a href="https://corporate.homedepot.com/news/partnerships/home-depot-and-google-cloud-launch-agentic-ai-tools-help-customers-and-associates">Magic Apron + Google Cloud Agentic AI</a></li>
+<li><a href="https://ir.homedepot.com/news-releases/2024/10-03-2024-150051692">Orange Apron Media - Orange Access Launch</a></li>
+<li><a href="https://corporate.homedepot.com/news/company/home-depot-launches-new-store-application-help-associates-provide-better-customer">Sidekick Associate App Launch</a></li>
+<li><a href="https://corporate.homedepot.com/news/company/home-depot-details-progress-transformational-one-home-depot-strategy-extend-market">One Home Depot Strategy</a></li>
+<li><a href="https://corporate.homedepot.com/news/products/home-depot-introduces-improved-search-all">Intent Search Launch</a></li>
+<li><a href="https://ir.homedepot.com/~/media/Files/H/HomeDepot-IR/2025/HD_2024_AR_IRsite_v2.pdf">2024 Annual Report (PDF)</a></li>
+</ul>
+<h3 id="home-depot-trade-publications-tier-2">Home Depot — Trade Publications (Tier 2)</h3>
+<ul>
+<li><a href="https://www.ciodive.com/news/home-depot-cio-appointment-angie-brown/749444/">CIO Appointment Analysis - CIO Dive</a></li>
+<li><a href="https://www.digitalcommerce360.com/2025/11/06/how-home-depot-is-using-ai/">AI Strategy Overview - Digital Commerce 360</a></li>
+<li><a href="https://www.digitalcommerce360.com/2025/03/04/home-depot-1-billion-b2b-sales-q4-2024/">B2B Growth $1B - Digital Commerce 360</a></li>
+<li><a href="https://www.digitalcommerce360.com/2025/08/20/why-home-depot-will-focus-on-digital-b2b-expansion/">B2B Expansion Focus - Digital Commerce 360</a></li>
+<li><a href="https://www.digitalcommerce360.com/2025/12/17/home-depot-touts-25-billion-ecommerce-business-and-ai-driven-delivery/">$25B Ecommerce - Digital Commerce 360</a></li>
+<li><a href="https://www.supplychaindive.com/news/home-depot-distribution-delivery-speed-strategy/808125/">Supply Chain Speed - Supply Chain Dive</a></li>
+<li><a href="https://www.supplychaindive.com/news/home-depot-fast-delivery-stocked-shelves/805890/">Fast Delivery Results - Supply Chain Dive</a></li>
+<li><a href="https://www.digitalcommerce360.com/2024/04/29/home-depot-rebrands-retail-media-network-orange-apron-media/">Orange Apron Media Rebrand - Digital Commerce 360</a></li>
+<li><a href="https://www.digitalcommerce360.com/2024/10/04/home-depot-orange-apron-retail-media-network-self-service-platform/">Orange Apron Self-Service - Digital Commerce 360</a></li>
+<li><a href="https://www.marketingdive.com/news/home-depot-orange-apron-retail-media-network-infronts/711240/">Retail Media Strategy - Marketing Dive</a></li>
+<li><a href="https://hbsdealer.com/inside-home-depots-play-pros">Pro Play Strategy - HBS Dealer</a></li>
+<li><a href="https://www.pymnts.com/earnings/2025/home-depot-targets-450-billion-dollar-pro-market-with-digital-distribution-power/">Pro Targeting $450B Market - PYMNTS</a></li>
+<li><a href="https://www.customerexperiencedive.com/news/home-depot-associates-professional-customers-sidekick/724136/">Sidekick Pro Features - CX Dive</a></li>
+<li><a href="https://hardwareretailing.com/home-depot-launches-new-mobile-app-wallet-feature/">HD Pass Mobile Wallet - Hardware Retailing</a></li>
+</ul>
+<h3 id="lowes">Lowe's</h3>
+<ul>
+<li><a href="https://corporate.lowes.com/newsroom/press-releases/lowes-launches-first-ai-powered-home-improvement-virtual-advisor-03-05-25">Mylow Launch - Corporate</a></li>
+<li><a href="https://openai.com/index/lowes/">OpenAI Partnership</a></li>
+<li><a href="https://www.modernretail.co/technology/lowes-wants-to-do-more-with-ai-shopping-in-2026/">2026 Strategy - Modern Retail</a></li>
+</ul>
+<h3 id="amazon">Amazon</h3>
+<ul>
+<li><a href="https://jasoncrawford.org/two-pizza-teams">Two-Pizza Teams - Jason Crawford</a></li>
+<li><a href="https://aws.amazon.com/executive-insights/content/amazon-two-pizza-team/">Amazon Two-Pizza Team - AWS Executive Insights</a></li>
+</ul>
+<h3 id="walmart">Walmart</h3>
+<ul>
+<li><a href="https://www.grocerydoppio.com/articles/walmart-2024-25-a-six-pillar-roadmap-to-digital-retail-dominance">Omnichannel Roadmap - Grocery Doppio</a></li>
+<li><a href="https://www.homepagenews.com/featured-news/special-report-inside-walmarts-omnichannel-evolution-toward-a-tech-driven-future/">Omnichannel Revolution - HomePage News</a></li>
+<li><a href="https://tech.walmart.com/content/walmart-global-tech/en_us.html">Walmart Global Tech</a></li>
+</ul>
+<h3 id="mckinseygartner">McKinsey/Gartner</h3>
+<ul>
+<li><a href="https://www.mckinsey.com/capabilities/mckinsey-technology/our-insights/the-ai-reckoning-how-boards-can-evolve">McKinsey AI Board Governance</a></li>
+<li><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai">McKinsey State of AI 2025</a></li>
+<li><a href="https://www.mckinsey.com/capabilities/risk-and-resilience/our-insights/deploying-agentic-ai-with-safety-and-security-a-playbook-for-technology-leaders">McKinsey Agentic AI Security</a></li>
+<li><a href="https://www.knostic.ai/blog/ai-governance-statistics">AI Governance Statistics - Knostic</a></li>
+<li><a href="https://www.gartner.com/en/industries/retail-digital-transformation">Gartner Retail Digital Transformation</a></li>
+</ul>
+<h3 id="industryframeworks">Industry/Frameworks</h3>
+<ul>
+<li><a href="https://teamtopologies.com/key-concepts">Team Topologies</a></li>
+<li><a href="https://chainstoreage.com/news-briefs/2025-05-14">J.D. Power Survey - Chain Store Age</a></li>
+<li><a href="https://www.questionpro.com/blog/home-depot-nps/">NPS Benchmarks - QuestionPro</a></li>
+</ul>
+</main>
+
+<div class="footer">
+    Home Depot Case Study | UGA Terry College Case Competition 2026<br>
+    <small>Generated from <code>findings.md</code></small>
+</div>
+
+<script>
+    function toggleSection(header) {
+        header.classList.toggle('active');
+        const content = header.nextElementSibling;
+        content.classList.toggle('active');
+    }
+
+    // Open all sections by default
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.section-header').forEach(function(header) {
+            header.classList.add('active');
+            header.nextElementSibling.classList.add('active');
+        });
+    });
+</script>
+
+</body>
+</html>

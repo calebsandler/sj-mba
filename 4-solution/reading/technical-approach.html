@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Approach: Visibility Layer Architecture - Home Depot Case Study</title>
+    <style>
+        /* Home Depot FY25 Official Brand Colors */
+        :root {
+            --hd-orange: #F96302;
+            --hd-black: #000000;
+            --hd-white: #FFFFFF;
+            --hd-gray-dark: #747474;
+            --hd-gray-medium: #C4C4C4;
+            --hd-gray-light: #F5F5F5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Helvetica Neue LT Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: var(--hd-white);
+            color: var(--hd-black);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Headlines - Bold, ALL CAPS for major sections */
+        h1 {
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            color: var(--hd-black);
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+            border-bottom: 4px solid var(--hd-orange);
+            font-size: 1.8em;
+        }
+
+        h2 {
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            text-transform: uppercase;
+            color: var(--hd-black);
+            margin: 32px 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--hd-orange);
+            font-size: 1.3em;
+        }
+
+        h3 {
+            font-weight: 700;
+            color: var(--hd-black);
+            margin: 24px 0 12px;
+            font-size: 1.1em;
+        }
+
+        h4 {
+            font-weight: 700;
+            color: var(--hd-black);
+            margin: 16px 0 8px;
+            font-size: 1em;
+        }
+
+        p {
+            color: var(--hd-gray-dark);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        strong {
+            color: var(--hd-black);
+        }
+
+        a {
+            color: var(--hd-orange);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul, ol {
+            margin: 16px 0;
+            padding-left: 24px;
+            color: var(--hd-gray-dark);
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        li::marker {
+            color: var(--hd-orange);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--hd-gray-light);
+            color: var(--hd-black);
+            padding: 48px 32px;
+            margin: -24px -24px 32px -24px;
+            text-align: center;
+            border-bottom: 4px solid var(--hd-orange);
+        }
+
+        .hero h1 {
+            border-bottom: none;
+            font-size: 2em;
+            margin-bottom: 8px;
+            padding-bottom: 0;
+        }
+
+        .hero-subtitle {
+            font-size: 1em;
+            color: var(--hd-gray-dark);
+            margin-bottom: 16px;
+        }
+
+        .hero-date {
+            font-size: 0.85em;
+            color: var(--hd-gray-dark);
+        }
+
+        /* Navigation */
+        .nav {
+            position: sticky;
+            top: 0;
+            background: var(--hd-white);
+            padding: 12px 0;
+            margin-bottom: 24px;
+            z-index: 100;
+            border-bottom: 2px solid var(--hd-gray-medium);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--hd-black);
+            padding: 6px 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8em;
+            letter-spacing: 0.02em;
+            border: 1px solid transparent;
+        }
+
+        .nav-links a:hover {
+            background: var(--hd-orange);
+            color: var(--hd-white);
+            text-decoration: none;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--hd-gray-medium);
+        }
+
+        th {
+            background: var(--hd-black);
+            color: var(--hd-white);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 0.02em;
+        }
+
+        td {
+            color: var(--hd-gray-dark);
+        }
+
+        tr:hover {
+            background: var(--hd-gray-light);
+        }
+
+        /* Code blocks */
+        code {
+            background: var(--hd-gray-light);
+            padding: 2px 6px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.9em;
+            border: 1px solid var(--hd-gray-medium);
+        }
+
+        pre {
+            background: var(--hd-black);
+            color: var(--hd-white);
+            padding: 20px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border-left: 4px solid var(--hd-orange);
+        }
+
+        pre code {
+            background: none;
+            border: none;
+            padding: 0;
+            color: var(--hd-white);
+        }
+
+        /* TL;DR Box */
+        .tldr {
+            background: var(--hd-black);
+            color: var(--hd-white);
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .tldr h3 {
+            color: var(--hd-orange);
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+
+        .tldr p {
+            color: var(--hd-white);
+            margin-bottom: 8px;
+        }
+
+        .tldr strong {
+            color: var(--hd-orange);
+        }
+
+        /* Quote Box */
+        .quote {
+            background: var(--hd-gray-light);
+            border-left: 4px solid var(--hd-orange);
+            padding: 20px 24px;
+            margin: 24px 0;
+            font-style: italic;
+            color: var(--hd-gray-dark);
+        }
+
+        .quote-author {
+            font-style: normal;
+            font-weight: 700;
+            color: var(--hd-black);
+            margin-top: 12px;
+            font-size: 0.9em;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            font-size: 1.15em;
+            text-align: center;
+            padding: 24px;
+            background: var(--hd-gray-light);
+            border-left: 4px solid var(--hd-orange);
+            margin: 24px 0;
+        }
+
+        /* Metrics Display */
+        .metrics {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin: 24px 0;
+        }
+
+        .metric {
+            background: var(--hd-white);
+            padding: 24px 32px;
+            text-align: center;
+            border: 2px solid var(--hd-gray-medium);
+            min-width: 140px;
+            flex: 1;
+        }
+
+        .metric-value {
+            font-size: 2.4em;
+            font-weight: 700;
+            color: var(--hd-orange);
+        }
+
+        .metric-label {
+            font-size: 0.8em;
+            color: var(--hd-gray-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            margin-top: 4px;
+        }
+
+        /* Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .card {
+            background: var(--hd-white);
+            border-left: 4px solid var(--hd-orange);
+            padding: 20px 24px;
+            border-top: 1px solid var(--hd-gray-medium);
+            border-right: 1px solid var(--hd-gray-medium);
+            border-bottom: 1px solid var(--hd-gray-medium);
+        }
+
+        .card h4 {
+            color: var(--hd-black);
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.02em;
+            margin-top: 0;
+        }
+
+        .card p {
+            margin-bottom: 0;
+        }
+
+        .card.problem {
+            border-left-color: var(--hd-black);
+            background: var(--hd-gray-light);
+        }
+
+        .card.solution {
+            border-left-color: var(--hd-orange);
+        }
+
+        /* Flow Diagram */
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 24px;
+            background: var(--hd-gray-light);
+            margin: 24px 0;
+        }
+
+        .flow-box {
+            background: var(--hd-white);
+            border: 2px solid var(--hd-gray-medium);
+            padding: 12px 16px;
+            text-align: center;
+            min-width: 120px;
+            font-size: 0.9em;
+            color: var(--hd-black);
+        }
+
+        .flow-arrow {
+            font-size: 1.5em;
+            color: var(--hd-orange);
+            font-weight: 700;
+        }
+
+        .flow-result {
+            background: var(--hd-black);
+            color: var(--hd-white);
+            border-color: var(--hd-black);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+            margin: 24px 0;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--hd-orange);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 16px 0;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -26px;
+            top: 22px;
+            width: 14px;
+            height: 14px;
+            background: var(--hd-orange);
+        }
+
+        .timeline-item strong {
+            display: block;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.02em;
+            margin-bottom: 4px;
+            color: var(--hd-black);
+        }
+
+        .timeline-item p {
+            margin: 0;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            font-size: 0.8em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .badge-critical {
+            background: var(--hd-orange);
+            color: var(--hd-white);
+        }
+
+        .badge-high {
+            background: var(--hd-black);
+            color: var(--hd-white);
+        }
+
+        .badge-medium {
+            background: var(--hd-gray-light);
+            color: var(--hd-black);
+            border: 1px solid var(--hd-gray-dark);
+        }
+
+        .badge-low {
+            background: var(--hd-gray-light);
+            color: var(--hd-gray-dark);
+            border: 1px solid var(--hd-gray-medium);
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--hd-gray-medium);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .checklist li::before {
+            content: "";
+            display: block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--hd-orange);
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+
+        /* Constraints/Pills */
+        .constraints {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .constraint {
+            background: var(--hd-black);
+            color: var(--hd-white);
+            padding: 10px 20px;
+            font-weight: 700;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        /* Collapsible Sections */
+        .section {
+            margin: 24px 0;
+            border: 1px solid var(--hd-gray-medium);
+        }
+
+        .section-header {
+            background: var(--hd-black);
+            color: var(--hd-white);
+            padding: 16px 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .section-header:hover {
+            background: #1a1a1a;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            color: var(--hd-white);
+            font-size: 1em;
+            border: none;
+            padding: 0;
+        }
+
+        .section-header .toggle {
+            font-size: 1.5em;
+            font-weight: 700;
+            transition: transform 0.3s;
+        }
+
+        .section-header.active .toggle {
+            transform: rotate(45deg);
+        }
+
+        .section-content {
+            padding: 24px;
+            display: none;
+            background: var(--hd-white);
+        }
+
+        .section-content.active {
+            display: block;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 2px solid var(--hd-gray-medium);
+            text-align: center;
+            color: var(--hd-gray-dark);
+            font-size: 0.85em;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                padding: 0;
+            }
+            .nav, .section-header .toggle {
+                display: none;
+            }
+            .section-content {
+                display: block !important;
+            }
+            .hero {
+                margin: 0 0 24px 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 16px;
+            }
+
+            .hero {
+                padding: 32px 16px;
+                margin: -16px -16px 24px -16px;
+            }
+
+            .flow-diagram {
+                flex-direction: column;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+
+            .metrics {
+                flex-direction: column;
+            }
+
+            .metric {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <h1>Technical Approach: Visibility Layer Architecture</h1>
+    <p class="hero-subtitle">Purpose:** Detailed technical specification for implementing the visibility layer — event schema, architecture, integration points, AI capabilities, and MVP scope.</p>
+    <p class="hero-date">Generated: February 03, 2026</p>
+</div>
+
+<nav class="nav">
+    <div class="nav-links">
+        <a href="#1-architecture-overview">1. Architecture Overview</a>
+<a href="#2-event-schema-definition">2. Event Schema Definition</a>
+<a href="#3-collision-detection-rules">3. Collision Detection Rules</a>
+<a href="#4-ai-capabilities">4. AI Capabilities</a>
+<a href="#5-integration-points-by-team">5. Integration Points by Team</a>
+<a href="#6-volume-scale">6. Volume & Scale</a>
+<a href="#7-mvp-technical-scope">7. MVP Technical Scope</a>
+<a href="#8-security-privacy">8. Security & Privacy</a>
+<a href="#9-success-metrics">9. Success Metrics</a>
+<a href="#10-open-technical-questions">10. Open Technical Questions</a>
+    </div>
+</nav>
+
+<main>
+<h1 id="technical-approach-visibility-layer-architecture">Technical Approach: Visibility Layer Architecture</h1>
+<blockquote>
+<p><strong>Purpose:</strong> Detailed technical specification for implementing the visibility layer — event schema, architecture, integration points, AI capabilities, and MVP scope.</p>
+</blockquote>
+<hr />
+<h2 id="1-architecture-overview">1. Architecture Overview</h2>
+<h3 id="system-diagram">System Diagram</h3>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────┐
+│                         VISIBILITY LAYER                                 │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                          │
+│   ┌──────────────┐    ┌──────────────┐    ┌──────────────┐              │
+│   │ Magic Apron  │    │    Recs/     │    │  Sponsored   │              │
+│   │   Chatbot    │    │   Search     │    │     Ads      │              │
+│   └──────┬───────┘    └──────┬───────┘    └──────┬───────┘              │
+│          │                   │                   │                       │
+│          ▼                   ▼                   ▼                       │
+│   ┌──────────────────────────────────────────────────────┐              │
+│   │              EVENT STREAM (Kafka/Pub-Sub)            │              │
+│   │                                                      │              │
+│   │  Topics:  /product-surfaced  /price-shown            │              │
+│   │          /inventory-claimed  /recommendation-made    │              │
+│   └──────────────────────┬───────────────────────────────┘              │
+│                          │                                               │
+│          ┌───────────────┼───────────────┐                              │
+│          ▼               ▼               ▼                              │
+│   ┌─────────────┐ ┌─────────────┐ ┌─────────────┐                       │
+│   │  Real-Time  │ │   Conflict  │ │     AI      │                       │
+│   │   Monitor   │ │  Detector   │ │  Analyzer   │                       │
+│   │  (&lt; 100ms)  │ │  (&lt; 500ms)  │ │   (async)   │                       │
+│   └──────┬──────┘ └──────┬──────┘ └──────┬──────┘                       │
+│          │               │               │                              │
+│          ▼               ▼               ▼                              │
+│   ┌─────────────────────────────────────────────────────┐               │
+│   │                 OUTPUTS                              │               │
+│   │  • Dashboard (cross-team visibility)                 │               │
+│   │  • Alerts (Slack, PagerDuty, email)                 │               │
+│   │  • Metrics API (for OKR tracking)                   │               │
+│   │  • Weekly Pattern Reports                           │               │
+│   └─────────────────────────────────────────────────────┘               │
+│                                                                          │
+└─────────────────────────────────────────────────────────────────────────┘
+
+                              ▲
+                              │
+              ┌───────────────┴───────────────┐
+              │      GROUND TRUTH SOURCES      │
+              │  • Inventory System (ERP)      │
+              │  • Pricing Service             │
+              │  • Store POS Data              │
+              └───────────────────────────────┘
+</code></pre>
+<h3 id="design-principles">Design Principles</h3>
+<table>
+<thead>
+<tr>
+<th>Principle</th>
+<th>Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Non-blocking</strong></td>
+<td>All processing is async; teams never wait for visibility layer</td>
+</tr>
+<tr>
+<td><strong>Schema-light</strong></td>
+<td>Minimal required fields; teams can add optional metadata</td>
+</tr>
+<tr>
+<td><strong>Fail-safe</strong></td>
+<td>If visibility layer is down, products continue working</td>
+</tr>
+<tr>
+<td><strong>Observable</strong></td>
+<td>Layer itself emits metrics for monitoring</td>
+</tr>
+<tr>
+<td><strong>Ephemeral</strong></td>
+<td>Events expire after 7 days; this is not a data warehouse</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-event-schema-definition">2. Event Schema Definition</h2>
+<h3 id="core-event-structure">Core Event Structure</h3>
+<p>Every event published to the visibility layer follows this schema:</p>
+<pre><code class="language-json">{
+  &quot;event_id&quot;: &quot;uuid-v4&quot;,
+  &quot;event_type&quot;: &quot;product_surfaced | price_shown | inventory_claimed | recommendation_made&quot;,
+  &quot;timestamp&quot;: &quot;2026-02-03T14:30:00.000Z&quot;,
+  &quot;source&quot;: {
+    &quot;team&quot;: &quot;magic_apron | recs | search | sponsored_ads | inventory | mobile_app&quot;,
+    &quot;service&quot;: &quot;chatbot-v2.1&quot;,
+    &quot;environment&quot;: &quot;production&quot;
+  },
+  &quot;product&quot;: {
+    &quot;sku&quot;: &quot;123456789&quot;,
+    &quot;price_shown&quot;: 29.99,
+    &quot;availability_claimed&quot;: &quot;in_stock | limited | out_of_stock&quot;,
+    &quot;store_id&quot;: &quot;0123&quot;,
+    &quot;quantity_claimed&quot;: 5
+  },
+  &quot;customer_context&quot;: {
+    &quot;session_id&quot;: &quot;hashed-session-id&quot;,
+    &quot;customer_segment&quot;: &quot;diy | pro&quot;,
+    &quot;channel&quot;: &quot;web | mobile_app | chatbot&quot;
+  },
+  &quot;metadata&quot;: {
+    &quot;confidence_score&quot;: 0.95,
+    &quot;model_version&quot;: &quot;recs-v3.2&quot;,
+    &quot;custom_fields&quot;: {}
+  }
+}
+</code></pre>
+<h3 id="required-fields-5-core-fields">Required Fields (5 Core Fields)</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sku</code></td>
+<td>string</td>
+<td>Product identifier</td>
+<td>"123456789"</td>
+</tr>
+<tr>
+<td><code>price_shown</code></td>
+<td>decimal</td>
+<td>Price displayed to customer</td>
+<td>29.99</td>
+</tr>
+<tr>
+<td><code>availability_claimed</code></td>
+<td>enum</td>
+<td>Inventory status shown</td>
+<td>"in_stock"</td>
+</tr>
+<tr>
+<td><code>store_id</code></td>
+<td>string</td>
+<td>Store location</td>
+<td>"0123"</td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td>ISO8601</td>
+<td>When customer saw this</td>
+<td>"2026-02-03T14:30:00Z"</td>
+</tr>
+</tbody>
+</table>
+<h3 id="event-types-by-team">Event Types by Team</h3>
+<table>
+<thead>
+<tr>
+<th>Team</th>
+<th>Event Types Published</th>
+<th>Trigger</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Magic Apron</strong></td>
+<td><code>product_surfaced</code>, <code>price_shown</code>, <code>inventory_claimed</code></td>
+<td>Chatbot recommends a product</td>
+</tr>
+<tr>
+<td><strong>Recommendations</strong></td>
+<td><code>recommendation_made</code>, <code>price_shown</code></td>
+<td>Rec carousel rendered</td>
+</tr>
+<tr>
+<td><strong>Search</strong></td>
+<td><code>product_surfaced</code>, <code>price_shown</code></td>
+<td>Search results displayed</td>
+</tr>
+<tr>
+<td><strong>Sponsored Ads</strong></td>
+<td><code>product_surfaced</code>, <code>price_shown</code></td>
+<td>Ad impression served</td>
+</tr>
+<tr>
+<td><strong>Mobile App</strong></td>
+<td><code>product_surfaced</code>, <code>inventory_claimed</code></td>
+<td>Product detail page viewed</td>
+</tr>
+<tr>
+<td><strong>Inventory (Ground Truth)</strong></td>
+<td><code>inventory_actual</code>, <code>price_actual</code></td>
+<td>Periodic sync (every 5 min)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="event-size-estimate">Event Size Estimate</h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Core fields</td>
+<td>~150 bytes</td>
+</tr>
+<tr>
+<td>Customer context</td>
+<td>~50 bytes</td>
+</tr>
+<tr>
+<td>Metadata</td>
+<td>~50 bytes</td>
+</tr>
+<tr>
+<td>JSON overhead</td>
+<td>~50 bytes</td>
+</tr>
+<tr>
+<td><strong>Total per event</strong></td>
+<td><strong>~300 bytes</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-collision-detection-rules">3. Collision Detection Rules</h2>
+<h3 id="daves-three-collision-types-detection-rules">Dave's Three Collision Types → Detection Rules</h3>
+<h4 id="type-1-data-collision-differentstale-data">Type 1: Data Collision (Different/Stale Data)</h4>
+<p><strong>Definition:</strong> Teams using different data sources, resulting in conflicting information.</p>
+<table>
+<thead>
+<tr>
+<th>Rule ID</th>
+<th>Rule Name</th>
+<th>Trigger Condition</th>
+<th>Severity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DC-001</td>
+<td>Price Mismatch</td>
+<td><code>abs(price_shown - price_actual) / price_actual &gt; 0.05</code> (5% variance)</td>
+<td>HIGH</td>
+</tr>
+<tr>
+<td>DC-002</td>
+<td>Inventory Contradiction</td>
+<td><code>availability_claimed = "in_stock" AND inventory_actual.quantity = 0</code></td>
+<td>CRITICAL</td>
+</tr>
+<tr>
+<td>DC-003</td>
+<td>Stale Data</td>
+<td><code>timestamp - inventory_actual.last_updated &gt; 30 minutes</code></td>
+<td>MEDIUM</td>
+</tr>
+<tr>
+<td>DC-004</td>
+<td>Store Mismatch</td>
+<td><code>event.store_id != customer_context.preferred_store</code></td>
+<td>LOW</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example:</strong></p>
+<pre><code>Magic Apron says: &quot;Deck stain in stock at Store 0123&quot;
+Inventory system: Store 0123 quantity = 0
+→ Triggers DC-002 (CRITICAL)
+</code></pre>
+<h4 id="type-2-logic-collision-conflicting-business-rules">Type 2: Logic Collision (Conflicting Business Rules)</h4>
+<p><strong>Definition:</strong> Different products applying conflicting optimization logic.</p>
+<table>
+<thead>
+<tr>
+<th>Rule ID</th>
+<th>Rule Name</th>
+<th>Trigger Condition</th>
+<th>Severity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LC-001</td>
+<td>Competing Recommendations</td>
+<td>Same SKU recommended by 2+ systems with different prices</td>
+<td>HIGH</td>
+</tr>
+<tr>
+<td>LC-002</td>
+<td>Screen Space Conflict</td>
+<td>Sponsored Ad and Organic Rec for same SKU within same session</td>
+<td>MEDIUM</td>
+</tr>
+<tr>
+<td>LC-003</td>
+<td>Contradictory Ranking</td>
+<td>Same product ranked #1 by Recs, buried by Search</td>
+<td>MEDIUM</td>
+</tr>
+<tr>
+<td>LC-004</td>
+<td>Promotion Conflict</td>
+<td>Different discount shown by different systems</td>
+<td>HIGH</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example:</strong></p>
+<pre><code>Recommendations: Shows &quot;Premium Deck Stain&quot; at $34.99
+Sponsored Ads: Shows same SKU at $29.99 (promotional price)
+→ Triggers LC-001 and LC-004 (HIGH)
+</code></pre>
+<h4 id="type-3-experience-collision-inconsistent-customer-experience">Type 3: Experience Collision (Inconsistent Customer Experience)</h4>
+<p><strong>Definition:</strong> Customer sees conflicting information across touchpoints.</p>
+<table>
+<thead>
+<tr>
+<th>Rule ID</th>
+<th>Rule Name</th>
+<th>Trigger Condition</th>
+<th>Severity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EC-001</td>
+<td>Multi-Channel Inconsistency</td>
+<td>Same session, same SKU, different price across channels</td>
+<td>CRITICAL</td>
+</tr>
+<tr>
+<td>EC-002</td>
+<td>Journey Fragmentation</td>
+<td>Customer sees &gt;3 different product recommendations in single session</td>
+<td>MEDIUM</td>
+</tr>
+<tr>
+<td>EC-003</td>
+<td>Trust Violation</td>
+<td>Customer clicks "in stock" → PDP shows "out of stock"</td>
+<td>CRITICAL</td>
+</tr>
+<tr>
+<td>EC-004</td>
+<td>Pro/DIY Mismatch</td>
+<td>Pro customer shown DIY-only pricing/products</td>
+<td>HIGH</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example:</strong></p>
+<pre><code>Session 123:
+  - Chatbot shows: &quot;Item A, $29.99, in stock&quot;
+  - Customer clicks to PDP: &quot;$34.99, limited availability&quot;
+→ Triggers EC-001 (CRITICAL) and EC-003 (CRITICAL)
+</code></pre>
+<h3 id="alert-thresholds">Alert Thresholds</h3>
+<table>
+<thead>
+<tr>
+<th>Severity</th>
+<th>Response Time</th>
+<th>Notification</th>
+<th>Auto-Escalation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CRITICAL</strong></td>
+<td>&lt; 5 minutes</td>
+<td>Slack + PagerDuty</td>
+<td>After 15 min unresolved</td>
+</tr>
+<tr>
+<td><strong>HIGH</strong></td>
+<td>&lt; 30 minutes</td>
+<td>Slack channel</td>
+<td>After 2 hours</td>
+</tr>
+<tr>
+<td><strong>MEDIUM</strong></td>
+<td>&lt; 4 hours</td>
+<td>Dashboard + email digest</td>
+<td>Weekly review</td>
+</tr>
+<tr>
+<td><strong>LOW</strong></td>
+<td>Next business day</td>
+<td>Dashboard only</td>
+<td>Monthly review</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-ai-capabilities">4. AI Capabilities</h2>
+<h3 id="what-ai-detects-that-rules-cant">What AI Detects (That Rules Can't)</h3>
+<table>
+<thead>
+<tr>
+<th>Capability</th>
+<th>Description</th>
+<th>Technique</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Pattern Mining</strong></td>
+<td>Recurring collision patterns by time/product/team</td>
+<td>Process mining on event sequences</td>
+</tr>
+<tr>
+<td><strong>Drift Detection</strong></td>
+<td>Model confidence degrading over time</td>
+<td>Statistical monitoring of confidence scores</td>
+</tr>
+<tr>
+<td><strong>Anomaly Detection</strong></td>
+<td>Unusual collision spikes</td>
+<td>Time-series anomaly detection</td>
+</tr>
+<tr>
+<td><strong>Root Cause Inference</strong></td>
+<td>Which upstream change caused collisions</td>
+<td>Causal inference on event chains</td>
+</tr>
+<tr>
+<td><strong>Prediction</strong></td>
+<td>"If Recs deploys v3.3, expect 12% collision increase with Search"</td>
+<td>Regression on historical patterns</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ai-processing-modes">AI Processing Modes</h3>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Latency</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Real-time (streaming)</strong></td>
+<td>&lt; 500ms</td>
+<td>Simple rule-based conflict detection</td>
+</tr>
+<tr>
+<td><strong>Near real-time (micro-batch)</strong></td>
+<td>1-5 min</td>
+<td>Aggregated anomaly detection</td>
+</tr>
+<tr>
+<td><strong>Batch (hourly)</strong></td>
+<td>1 hour</td>
+<td>Pattern mining, process discovery</td>
+</tr>
+<tr>
+<td><strong>Batch (daily)</strong></td>
+<td>Overnight</td>
+<td>Model retraining, weekly reports</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example-ai-insights">Example AI Insights</h3>
+<pre><code>Weekly Pattern Report:
+
+1. RECURRING CONFLICT: Magic Apron + Inventory
+   - Every Tuesday 2-4pm, inventory sync delay causes 15% collision spike
+   - Root cause: Batch job overlaps with promotional pricing updates
+   - Recommendation: Stagger batch jobs by 30 minutes
+
+2. MODEL DRIFT DETECTED: Recommendations Engine
+   - Confidence scores down 8% over past 2 weeks
+   - Correlated with new seasonal inventory
+   - Recommendation: Retrain with Q1 data
+
+3. PREDICTION: Sponsored Ads Campaign Launch
+   - New campaign starting Monday targets 500 SKUs
+   - Historical pattern: 23% collision rate with Recs for same SKUs
+   - Recommendation: Coordinate with Recs team before launch
+</code></pre>
+<hr />
+<h2 id="5-integration-points-by-team">5. Integration Points by Team</h2>
+<h3 id="magic-apron-chatbot">Magic Apron (Chatbot)</h3>
+<table>
+<thead>
+<tr>
+<th>Integration Point</th>
+<th>Method</th>
+<th>Effort</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Publish <code>product_surfaced</code></td>
+<td>Add event emission after recommendation response</td>
+<td>2-3 days</td>
+</tr>
+<tr>
+<td>Publish <code>inventory_claimed</code></td>
+<td>Emit when chatbot asserts availability</td>
+<td>1-2 days</td>
+</tr>
+<tr>
+<td>Consume conflict alerts</td>
+<td>Subscribe to Slack channel or webhook</td>
+<td>1 day</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Code Change (Pseudocode):</strong></p>
+<pre><code class="language-python">def recommend_product(user_query, session_id):
+    product = get_recommendation(user_query)
+
+    # NEW: Publish to visibility layer
+    visibility_layer.publish({
+        &quot;event_type&quot;: &quot;product_surfaced&quot;,
+        &quot;sku&quot;: product.sku,
+        &quot;price_shown&quot;: product.price,
+        &quot;availability_claimed&quot;: product.availability,
+        &quot;store_id&quot;: user.preferred_store,
+        &quot;source&quot;: {&quot;team&quot;: &quot;magic_apron&quot;, &quot;service&quot;: &quot;chatbot-v2.1&quot;}
+    })
+
+    return product
+</code></pre>
+<h3 id="recommendations-engine">Recommendations Engine</h3>
+<table>
+<thead>
+<tr>
+<th>Integration Point</th>
+<th>Method</th>
+<th>Effort</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Publish <code>recommendation_made</code></td>
+<td>Emit on carousel render</td>
+<td>2-3 days</td>
+</tr>
+<tr>
+<td>Consume collision feedback</td>
+<td>API to query conflicts involving Recs</td>
+<td>3-5 days</td>
+</tr>
+</tbody>
+</table>
+<h3 id="inventory-system-ground-truth">Inventory System (Ground Truth)</h3>
+<table>
+<thead>
+<tr>
+<th>Integration Point</th>
+<th>Method</th>
+<th>Effort</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Publish <code>inventory_actual</code></td>
+<td>Periodic sync every 5 minutes</td>
+<td>3-5 days</td>
+</tr>
+<tr>
+<td>Real-time updates</td>
+<td>Change data capture (CDC) on inventory DB</td>
+<td>1-2 weeks</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sponsored-ads">Sponsored Ads</h3>
+<table>
+<thead>
+<tr>
+<th>Integration Point</th>
+<th>Method</th>
+<th>Effort</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Publish <code>ad_impression</code></td>
+<td>Emit on ad serve</td>
+<td>2-3 days</td>
+</tr>
+<tr>
+<td>Pre-flight check (optional)</td>
+<td>Query visibility layer before serving ad</td>
+<td>1 week</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6-volume-scale">6. Volume &amp; Scale</h2>
+<h3 id="clarifying-event-volume">Clarifying Event Volume</h3>
+<p>The visibility layer handles a <strong>subset</strong> of all digital events — only customer-facing product decisions:</p>
+<table>
+<thead>
+<tr>
+<th>Event Category</th>
+<th style="text-align: right;">Daily Volume</th>
+<th>In Scope?</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Total web events</td>
+<td style="text-align: right;">72M+</td>
+<td>No</td>
+<td>Raw clickstream, not needed</td>
+</tr>
+<tr>
+<td>Product recommendations served</td>
+<td style="text-align: right;">50M</td>
+<td><strong>Yes</strong></td>
+<td>Core collision detection</td>
+</tr>
+<tr>
+<td>Search results shown</td>
+<td style="text-align: right;">5M</td>
+<td><strong>Yes</strong></td>
+<td>Product surfacing events</td>
+</tr>
+<tr>
+<td>Chatbot interactions</td>
+<td style="text-align: right;">~500K-1M</td>
+<td><strong>Yes</strong></td>
+<td>Magic Apron focus</td>
+</tr>
+<tr>
+<td>Inventory ground truth</td>
+<td style="text-align: right;">5M</td>
+<td><strong>Yes</strong></td>
+<td>Sync events</td>
+</tr>
+<tr>
+<td><strong>Total in-scope events</strong></td>
+<td style="text-align: right;"><strong>~60-65M/day</strong></td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="infrastructure-sizing">Infrastructure Sizing</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Events per second (peak)</td>
+<td>~1,500/sec</td>
+</tr>
+<tr>
+<td>Events per second (average)</td>
+<td>~750/sec</td>
+</tr>
+<tr>
+<td>Daily data volume</td>
+<td>~18-20 GB</td>
+</tr>
+<tr>
+<td>Monthly data volume</td>
+<td>~550-600 GB</td>
+</tr>
+<tr>
+<td>Retention period</td>
+<td>7 days</td>
+</tr>
+<tr>
+<td>Storage required</td>
+<td>~140 GB (7 days × 20 GB)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="platform-recommendation">Platform Recommendation</h3>
+<p><strong>Primary: Google Cloud Pub/Sub</strong> (HD's existing cloud partner)</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pub/Sub topics</td>
+<td>4 (product_surfaced, price_shown, inventory_actual, conflicts)</td>
+</tr>
+<tr>
+<td>Subscriptions</td>
+<td>6 (one per consumer service)</td>
+</tr>
+<tr>
+<td>Message retention</td>
+<td>7 days</td>
+</tr>
+<tr>
+<td>Dead letter queue</td>
+<td>Yes, for failed processing</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Alternative: Apache Kafka (self-managed or Confluent)</strong>
+- Better for complex stream processing
+- Higher operational overhead
+- Consider if Pub/Sub latency becomes an issue</p>
+<hr />
+<h2 id="7-mvp-technical-scope">7. MVP Technical Scope</h2>
+<h3 id="phase-1-instrument-weeks-1-4">Phase 1: Instrument (Weeks 1-4)</h3>
+<div class="timeline">
+<div class="timeline-item">
+    <strong>Week 1</strong>
+    <p>Define event schema, set up Pub/Sub topics, create conflict detector skeleton</p>
+</div>
+<div class="timeline-item">
+    <strong>Week 2</strong>
+    <p>Instrument Magic Apron to publish events (3 event types)</p>
+</div>
+<div class="timeline-item">
+    <strong>Week 3</strong>
+    <p>Connect Inventory system as ground truth source</p>
+</div>
+<div class="timeline-item">
+    <strong>Week 4</strong>
+    <p>Implement DC-001 (price mismatch) and DC-002 (inventory contradiction) rules</p>
+</div>
+</div>
+
+<p><strong>Deliverables:</strong>
+- [ ] Event schema finalized and documented
+- [ ] Pub/Sub infrastructure deployed
+- [ ] Magic Apron publishing events to stream
+- [ ] Inventory system publishing ground truth
+- [ ] 2 collision detection rules active</p>
+<h3 id="phase-2-visibility-weeks-5-8">Phase 2: Visibility (Weeks 5-8)</h3>
+<div class="timeline">
+<div class="timeline-item">
+    <strong>Week 5</strong>
+    <p>Build dashboard showing real-time conflict rate</p>
+</div>
+<div class="timeline-item">
+    <strong>Week 6</strong>
+    <p>Implement alert system (Slack integration)</p>
+</div>
+<div class="timeline-item">
+    <strong>Week 7</strong>
+    <p>Add historical conflict viewer (7-day lookback)</p>
+</div>
+<div class="timeline-item">
+    <strong>Week 8</strong>
+    <p>Create "Accuracy to Reality" OKR metrics API</p>
+</div>
+</div>
+
+<p><strong>Deliverables:</strong>
+- [ ] Dashboard with real-time conflict visualization
+- [ ] Slack alerts for CRITICAL and HIGH severity
+- [ ] Conflict drill-down by team, product, time
+- [ ] API endpoint for OKR tracking</p>
+<h3 id="phase-3-ai-analysis-weeks-9-12">Phase 3: AI Analysis (Weeks 9-12)</h3>
+<div class="timeline">
+<div class="timeline-item">
+    <strong>Week 9</strong>
+    <p>Implement batch pattern mining job</p>
+</div>
+<div class="timeline-item">
+    <strong>Week 10</strong>
+    <p>Build anomaly detection for collision spikes</p>
+</div>
+<div class="timeline-item">
+    <strong>Week 11</strong>
+    <p>Create weekly pattern report generator</p>
+</div>
+<div class="timeline-item">
+    <strong>Week 12</strong>
+    <p>Test, iterate, prepare for expansion</p>
+</div>
+</div>
+
+<p><strong>Deliverables:</strong>
+- [ ] Weekly automated pattern report
+- [ ] Anomaly alerts for unusual collision spikes
+- [ ] Root cause suggestions for recurring conflicts</p>
+<h3 id="phase-4-expand-months-4-6">Phase 4: Expand (Months 4-6)</h3>
+<ul>
+<li>Add Recommendations engine to event stream</li>
+<li>Add Search to event stream</li>
+<li>Add Sponsored Ads with pre-flight conflict check</li>
+<li>Implement logic collision rules (LC-001 through LC-004)</li>
+<li>Expand AI to predictive capabilities</li>
+</ul>
+<hr />
+<h2 id="8-security-privacy">8. Security &amp; Privacy</h2>
+<h3 id="data-handling">Data Handling</h3>
+<table>
+<thead>
+<tr>
+<th>Concern</th>
+<th>Approach</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PII</strong></td>
+<td>No customer PII in events; session_id is hashed</td>
+</tr>
+<tr>
+<td><strong>Pricing data</strong></td>
+<td>Internal only; not exposed externally</td>
+</tr>
+<tr>
+<td><strong>Access control</strong></td>
+<td>Teams can only query conflicts involving their events</td>
+</tr>
+<tr>
+<td><strong>Retention</strong></td>
+<td>7 days max; automatic expiration</td>
+</tr>
+<tr>
+<td><strong>Audit logging</strong></td>
+<td>All queries logged for compliance</td>
+</tr>
+</tbody>
+</table>
+<h3 id="network-security">Network Security</h3>
+<ul>
+<li>Events flow within HD's VPC (no public internet)</li>
+<li>Pub/Sub IAM controls per topic</li>
+<li>Encryption in transit (TLS) and at rest</li>
+</ul>
+<hr />
+<h2 id="9-success-metrics">9. Success Metrics</h2>
+<h3 id="technical-metrics">Technical Metrics</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Target</th>
+<th>Measurement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Event ingestion latency</td>
+<td>&lt; 100ms (p99)</td>
+<td>Pub/Sub metrics</td>
+</tr>
+<tr>
+<td>Conflict detection latency</td>
+<td>&lt; 500ms (p99)</td>
+<td>Custom instrumentation</td>
+</tr>
+<tr>
+<td>System availability</td>
+<td>99.9%</td>
+<td>Uptime monitoring</td>
+</tr>
+<tr>
+<td>False positive rate</td>
+<td>&lt; 5%</td>
+<td>Manual review sample</td>
+</tr>
+</tbody>
+</table>
+<h3 id="business-metrics">Business Metrics</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Baseline</th>
+<th>Target (6 months)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Conflict rate (Magic Apron + Inventory)</td>
+<td>Unknown (establish in Month 1)</td>
+<td>-50% from baseline</td>
+</tr>
+<tr>
+<td>Mean time to detect conflict</td>
+<td>N/A (currently post-hoc)</td>
+<td>&lt; 5 minutes</td>
+</tr>
+<tr>
+<td>Redundancy rate</td>
+<td>35-45%</td>
+<td>-20% (relative)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="10-open-technical-questions">10. Open Technical Questions</h2>
+<ul>
+<li>[ ] <strong>Real-time blocking vs. logging-only?</strong> Start with logging; add optional blocking for CRITICAL conflicts after validation period</li>
+<li>[ ] <strong>Schema versioning strategy?</strong> Use schema registry (Confluent or custom) to manage evolution</li>
+<li>[ ] <strong>Backfill historical data?</strong> Probably not — start fresh, establish baseline going forward</li>
+<li>[ ] <strong>Multi-region deployment?</strong> Start single-region; expand if latency becomes an issue</li>
+<li>[ ] <strong>Integration with existing observability?</strong> Emit metrics to existing DataDog/Grafana stack</li>
+</ul>
+<hr />
+<h2 id="appendix-technology-stack">Appendix: Technology Stack</h2>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Technology</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Event streaming</td>
+<td>Google Cloud Pub/Sub</td>
+<td>HD's cloud partner; managed service</td>
+</tr>
+<tr>
+<td>Stream processing</td>
+<td>Cloud Dataflow (Apache Beam)</td>
+<td>Serverless, auto-scaling</td>
+</tr>
+<tr>
+<td>Conflict rules engine</td>
+<td>Custom Python service</td>
+<td>Flexibility for complex rules</td>
+</tr>
+<tr>
+<td>AI/ML</td>
+<td>Vertex AI</td>
+<td>Integrated with GCP; managed training</td>
+</tr>
+<tr>
+<td>Dashboard</td>
+<td>Looker or custom React</td>
+<td>HD likely has existing BI tools</td>
+</tr>
+<tr>
+<td>Alerting</td>
+<td>Slack + PagerDuty</td>
+<td>Standard enterprise tooling</td>
+</tr>
+<tr>
+<td>Storage (if needed)</td>
+<td>BigQuery</td>
+<td>For historical analysis beyond 7 days</td>
+</tr>
+</tbody>
+</table>
+</main>
+
+<div class="footer">
+    Home Depot Case Study | UGA Terry College Case Competition 2026<br>
+    <small>Generated from <code>technical-approach.md</code></small>
+</div>
+
+<script>
+    function toggleSection(header) {
+        header.classList.toggle('active');
+        const content = header.nextElementSibling;
+        content.classList.toggle('active');
+    }
+
+    // Open all sections by default
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.section-header').forEach(function(header) {
+            header.classList.add('active');
+            header.nextElementSibling.classList.add('active');
+        });
+    });
+</script>
+
+</body>
+</html>

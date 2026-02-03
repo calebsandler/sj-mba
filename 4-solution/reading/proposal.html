@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solution Proposal: Visibility Layer - Home Depot Case Study</title>
+    <style>
+        /* Home Depot FY25 Official Brand Colors */
+        :root {
+            --hd-orange: #F96302;
+            --hd-black: #000000;
+            --hd-white: #FFFFFF;
+            --hd-gray-dark: #747474;
+            --hd-gray-medium: #C4C4C4;
+            --hd-gray-light: #F5F5F5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Helvetica Neue LT Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: var(--hd-white);
+            color: var(--hd-black);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Headlines - Bold, ALL CAPS for major sections */
+        h1 {
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            color: var(--hd-black);
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+            border-bottom: 4px solid var(--hd-orange);
+            font-size: 1.8em;
+        }
+
+        h2 {
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            text-transform: uppercase;
+            color: var(--hd-black);
+            margin: 32px 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--hd-orange);
+            font-size: 1.3em;
+        }
+
+        h3 {
+            font-weight: 700;
+            color: var(--hd-black);
+            margin: 24px 0 12px;
+            font-size: 1.1em;
+        }
+
+        h4 {
+            font-weight: 700;
+            color: var(--hd-black);
+            margin: 16px 0 8px;
+            font-size: 1em;
+        }
+
+        p {
+            color: var(--hd-gray-dark);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        strong {
+            color: var(--hd-black);
+        }
+
+        a {
+            color: var(--hd-orange);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul, ol {
+            margin: 16px 0;
+            padding-left: 24px;
+            color: var(--hd-gray-dark);
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        li::marker {
+            color: var(--hd-orange);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--hd-gray-light);
+            color: var(--hd-black);
+            padding: 48px 32px;
+            margin: -24px -24px 32px -24px;
+            text-align: center;
+            border-bottom: 4px solid var(--hd-orange);
+        }
+
+        .hero h1 {
+            border-bottom: none;
+            font-size: 2em;
+            margin-bottom: 8px;
+            padding-bottom: 0;
+        }
+
+        .hero-subtitle {
+            font-size: 1em;
+            color: var(--hd-gray-dark);
+            margin-bottom: 16px;
+        }
+
+        .hero-date {
+            font-size: 0.85em;
+            color: var(--hd-gray-dark);
+        }
+
+        /* Navigation */
+        .nav {
+            position: sticky;
+            top: 0;
+            background: var(--hd-white);
+            padding: 12px 0;
+            margin-bottom: 24px;
+            z-index: 100;
+            border-bottom: 2px solid var(--hd-gray-medium);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--hd-black);
+            padding: 6px 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8em;
+            letter-spacing: 0.02em;
+            border: 1px solid transparent;
+        }
+
+        .nav-links a:hover {
+            background: var(--hd-orange);
+            color: var(--hd-white);
+            text-decoration: none;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--hd-gray-medium);
+        }
+
+        th {
+            background: var(--hd-black);
+            color: var(--hd-white);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 0.02em;
+        }
+
+        td {
+            color: var(--hd-gray-dark);
+        }
+
+        tr:hover {
+            background: var(--hd-gray-light);
+        }
+
+        /* Code blocks */
+        code {
+            background: var(--hd-gray-light);
+            padding: 2px 6px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.9em;
+            border: 1px solid var(--hd-gray-medium);
+        }
+
+        pre {
+            background: var(--hd-black);
+            color: var(--hd-white);
+            padding: 20px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border-left: 4px solid var(--hd-orange);
+        }
+
+        pre code {
+            background: none;
+            border: none;
+            padding: 0;
+            color: var(--hd-white);
+        }
+
+        /* TL;DR Box */
+        .tldr {
+            background: var(--hd-black);
+            color: var(--hd-white);
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .tldr h3 {
+            color: var(--hd-orange);
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+
+        .tldr p {
+            color: var(--hd-white);
+            margin-bottom: 8px;
+        }
+
+        .tldr strong {
+            color: var(--hd-orange);
+        }
+
+        /* Quote Box */
+        .quote {
+            background: var(--hd-gray-light);
+            border-left: 4px solid var(--hd-orange);
+            padding: 20px 24px;
+            margin: 24px 0;
+            font-style: italic;
+            color: var(--hd-gray-dark);
+        }
+
+        .quote-author {
+            font-style: normal;
+            font-weight: 700;
+            color: var(--hd-black);
+            margin-top: 12px;
+            font-size: 0.9em;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            font-size: 1.15em;
+            text-align: center;
+            padding: 24px;
+            background: var(--hd-gray-light);
+            border-left: 4px solid var(--hd-orange);
+            margin: 24px 0;
+        }
+
+        /* Metrics Display */
+        .metrics {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin: 24px 0;
+        }
+
+        .metric {
+            background: var(--hd-white);
+            padding: 24px 32px;
+            text-align: center;
+            border: 2px solid var(--hd-gray-medium);
+            min-width: 140px;
+            flex: 1;
+        }
+
+        .metric-value {
+            font-size: 2.4em;
+            font-weight: 700;
+            color: var(--hd-orange);
+        }
+
+        .metric-label {
+            font-size: 0.8em;
+            color: var(--hd-gray-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            margin-top: 4px;
+        }
+
+        /* Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .card {
+            background: var(--hd-white);
+            border-left: 4px solid var(--hd-orange);
+            padding: 20px 24px;
+            border-top: 1px solid var(--hd-gray-medium);
+            border-right: 1px solid var(--hd-gray-medium);
+            border-bottom: 1px solid var(--hd-gray-medium);
+        }
+
+        .card h4 {
+            color: var(--hd-black);
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.02em;
+            margin-top: 0;
+        }
+
+        .card p {
+            margin-bottom: 0;
+        }
+
+        .card.problem {
+            border-left-color: var(--hd-black);
+            background: var(--hd-gray-light);
+        }
+
+        .card.solution {
+            border-left-color: var(--hd-orange);
+        }
+
+        /* Flow Diagram */
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 24px;
+            background: var(--hd-gray-light);
+            margin: 24px 0;
+        }
+
+        .flow-box {
+            background: var(--hd-white);
+            border: 2px solid var(--hd-gray-medium);
+            padding: 12px 16px;
+            text-align: center;
+            min-width: 120px;
+            font-size: 0.9em;
+            color: var(--hd-black);
+        }
+
+        .flow-arrow {
+            font-size: 1.5em;
+            color: var(--hd-orange);
+            font-weight: 700;
+        }
+
+        .flow-result {
+            background: var(--hd-black);
+            color: var(--hd-white);
+            border-color: var(--hd-black);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+            margin: 24px 0;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--hd-orange);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 16px 0;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -26px;
+            top: 22px;
+            width: 14px;
+            height: 14px;
+            background: var(--hd-orange);
+        }
+
+        .timeline-item strong {
+            display: block;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.02em;
+            margin-bottom: 4px;
+            color: var(--hd-black);
+        }
+
+        .timeline-item p {
+            margin: 0;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            font-size: 0.8em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .badge-critical {
+            background: var(--hd-orange);
+            color: var(--hd-white);
+        }
+
+        .badge-high {
+            background: var(--hd-black);
+            color: var(--hd-white);
+        }
+
+        .badge-medium {
+            background: var(--hd-gray-light);
+            color: var(--hd-black);
+            border: 1px solid var(--hd-gray-dark);
+        }
+
+        .badge-low {
+            background: var(--hd-gray-light);
+            color: var(--hd-gray-dark);
+            border: 1px solid var(--hd-gray-medium);
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--hd-gray-medium);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .checklist li::before {
+            content: "";
+            display: block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--hd-orange);
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+
+        /* Constraints/Pills */
+        .constraints {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .constraint {
+            background: var(--hd-black);
+            color: var(--hd-white);
+            padding: 10px 20px;
+            font-weight: 700;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        /* Collapsible Sections */
+        .section {
+            margin: 24px 0;
+            border: 1px solid var(--hd-gray-medium);
+        }
+
+        .section-header {
+            background: var(--hd-black);
+            color: var(--hd-white);
+            padding: 16px 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .section-header:hover {
+            background: #1a1a1a;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            color: var(--hd-white);
+            font-size: 1em;
+            border: none;
+            padding: 0;
+        }
+
+        .section-header .toggle {
+            font-size: 1.5em;
+            font-weight: 700;
+            transition: transform 0.3s;
+        }
+
+        .section-header.active .toggle {
+            transform: rotate(45deg);
+        }
+
+        .section-content {
+            padding: 24px;
+            display: none;
+            background: var(--hd-white);
+        }
+
+        .section-content.active {
+            display: block;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 2px solid var(--hd-gray-medium);
+            text-align: center;
+            color: var(--hd-gray-dark);
+            font-size: 0.85em;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                padding: 0;
+            }
+            .nav, .section-header .toggle {
+                display: none;
+            }
+            .section-content {
+                display: block !important;
+            }
+            .hero {
+                margin: 0 0 24px 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 16px;
+            }
+
+            .hero {
+                padding: 32px 16px;
+                margin: -16px -16px 24px -16px;
+            }
+
+            .flow-diagram {
+                flex-direction: column;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+
+            .metrics {
+                flex-direction: column;
+            }
+
+            .metric {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <h1>Solution Proposal: Visibility Layer</h1>
+    <p class="hero-subtitle">See [Technical Approach](technical-approach.md) for detailed architecture, event schema, and collision detection rules.</p>
+    <p class="hero-date">Generated: February 03, 2026</p>
+</div>
+
+<nav class="nav">
+    <div class="nav-links">
+        <a href="#concept-one-sentence">Concept (One Sentence)</a>
+<a href="#what-it-is-what-it-isn-t">What It Is / What It Isn't</a>
+<a href="#how-it-works">How It Works</a>
+<a href="#the-shared-okr-accuracy-to-reality">The Shared OKR: "Accuracy to Reality"</a>
+<a href="#technical-feasibility">Technical Feasibility</a>
+<a href="#financial-analysis">Financial Analysis</a>
+<a href="#mvp-scope">MVP Scope</a>
+<a href="#implementation-roadmap">Implementation Roadmap</a>
+<a href="#why-this-works">Why This Works</a>
+<a href="#governance-model">Governance Model</a>
+    </div>
+</nav>
+
+<main>
+<h1 id="solution-proposal-visibility-layer">Solution Proposal: Visibility Layer</h1>
+<h2 id="concept-one-sentence">Concept (One Sentence)</h2>
+<p>A lightweight event stream where teams publish their customer-facing decisions, enabling real-time conflict detection without centralizing decision-making power.</p>
+<h2 id="what-it-is-what-it-isnt">What It Is / What It Isn't</h2>
+<table>
+<thead>
+<tr>
+<th>It IS</th>
+<th>It ISN'T</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Event stream (ephemeral)</td>
+<td>Data warehouse (permanent)</td>
+</tr>
+<tr>
+<td>Conflict detection</td>
+<td>Conflict resolution</td>
+</tr>
+<tr>
+<td>Shared visibility</td>
+<td>Centralized control</td>
+</tr>
+<tr>
+<td>Additive layer</td>
+<td>Replacement of existing systems</td>
+</tr>
+<tr>
+<td>Schema-light</td>
+<td>Complex ETL pipelines</td>
+</tr>
+</tbody>
+</table>
+<h2 id="how-it-works">How It Works</h2>
+<pre><code>[Magic Apron] ──┐
+[Recs/Search] ──┼──▶ Event Stream ──▶ Conflict Detector ──▶ Alerts/Dashboard
+[Sponsored]   ──┤         ▲
+[Inventory]   ──┘         │
+                    AI Analysis Layer
+                   (async, not blocking)
+</code></pre>
+<h3 id="what-teams-do">What Teams Do</h3>
+<ul>
+<li>Publish a lightweight event when surfacing something to a customer</li>
+<li>Event = product ID, price, store, availability, timestamp (~200 bytes)</li>
+<li>That's it. No changes to their databases, models, or workflows.</li>
+</ul>
+<h3 id="what-the-layer-does">What The Layer Does</h3>
+<ul>
+<li>Consumes events in real-time</li>
+<li>Checks for conflicts (price mismatch &gt; X%, inventory disagreement, etc.)</li>
+<li>Logs everything, alerts on thresholds</li>
+<li>AI runs async to find patterns over time (process mining)</li>
+</ul>
+<h2 id="the-shared-okr-accuracy-to-reality">The Shared OKR: "Accuracy to Reality"</h2>
+<p>All teams adopt a new shared metric <strong>alongside</strong> their existing OKRs (not replacing them):</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Definition</th>
+<th>Target (6 Months)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Conflict Rate</strong></td>
+<td>% of events with detected conflicts</td>
+<td>&lt; 2% (from unknown baseline)</td>
+</tr>
+<tr>
+<td><strong>Mean Time to Detect</strong></td>
+<td>Time from conflict occurrence to alert</td>
+<td>&lt; 5 minutes</td>
+</tr>
+<tr>
+<td><strong>Resolution Rate</strong></td>
+<td>% of flagged conflicts addressed within SLA</td>
+<td>&gt; 90% within 24 hours</td>
+</tr>
+<tr>
+<td><strong>Customer Impact Incidents</strong></td>
+<td>Conflicts that reached customers</td>
+<td>&lt; 10 per week</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How it works with existing OKRs:</strong>
+- Teams keep 100% of their current OKRs (engagement, clicks, revenue, etc.)
+- "Accuracy to Reality" is an <strong>additional</strong> shared metric visible to all
+- No team is penalized for conflicts they didn't cause
+- Incentive: teams that reduce conflicts in their domain get recognition</p>
+<h2 id="technical-feasibility">Technical Feasibility</h2>
+<blockquote>
+<p><strong>See <a href="technical-approach.md">Technical Approach</a> for detailed architecture, event schema, and collision detection rules.</strong></p>
+</blockquote>
+<h3 id="scale-math">Scale Math</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Estimate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Daily transactions</td>
+<td>4.5 million</td>
+</tr>
+<tr>
+<td>Events per transaction</td>
+<td>3-5</td>
+</tr>
+<tr>
+<td>Event size</td>
+<td>~200 bytes</td>
+</tr>
+<tr>
+<td>Daily data volume</td>
+<td>~3-5 GB</td>
+</tr>
+<tr>
+<td>Monthly data volume</td>
+<td>~100-150 GB</td>
+</tr>
+</tbody>
+</table>
+<p>This is trivial for modern event streaming (Kafka, AWS Kinesis, GCP Pub/Sub).</p>
+<h3 id="why-its-not-a-data-warehouse">Why It's Not a Data Warehouse</h3>
+<ul>
+<li>Events flow through and expire (7-day retention)</li>
+<li>No ETL — teams just publish</li>
+<li>Schema is thin (5 fields)</li>
+<li>Optimized for real-time, not historical queries</li>
+<li>Cheap, fast, ephemeral</li>
+</ul>
+<h3 id="spaghetti-prevention">Spaghetti Prevention</h3>
+<ul>
+<li>Schema contracts: each team publishes to a defined format</li>
+<li>Layer rejects malformed events</li>
+<li>Lightweight governance, not integration hell</li>
+</ul>
+<h2 id="financial-analysis">Financial Analysis</h2>
+<blockquote>
+<p><strong>See <a href="financial-analysis.md">Financial Analysis</a> for detailed projections, scenarios, and assumptions.</strong></p>
+</blockquote>
+<h3 id="investment-summary">Investment Summary</h3>
+<table>
+<thead>
+<tr>
+<th>Period</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Year 1 (Build)</td>
+<td>$1.2-1.5M</td>
+</tr>
+<tr>
+<td>Year 2+ (Operate)</td>
+<td>$400-600K</td>
+</tr>
+<tr>
+<td><strong>3-Year Total</strong></td>
+<td><strong>$2.3M</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="cost-of-doing-nothing-3-year">Cost of Doing Nothing (3-Year)</h3>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Annual Cost</th>
+<th>3-Year Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Engineering redundancy (35-45% overlap)</td>
+<td>$2.6M</td>
+<td>$9M</td>
+</tr>
+<tr>
+<td>Customer service friction</td>
+<td>$660K</td>
+<td>$2.3M</td>
+</tr>
+<tr>
+<td>OOS-related revenue loss</td>
+<td>$6.3M</td>
+<td>$22M</td>
+</tr>
+<tr>
+<td><strong>Known costs</strong></td>
+<td><strong>$9.6M</strong></td>
+<td><strong>$33M</strong></td>
+</tr>
+<tr>
+<td>Customer defection risk</td>
+<td>$159M at risk</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="roi">ROI</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3-Year Net Benefit</td>
+<td>$6-8M (moderate case)</td>
+</tr>
+<tr>
+<td>Payback Period</td>
+<td>5-7 months</td>
+</tr>
+<tr>
+<td>3-Year ROI</td>
+<td>147%</td>
+</tr>
+<tr>
+<td>NPV (10% discount)</td>
+<td>$3M+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Even in the worst case scenario, ROI is positive.</strong></p>
+<h2 id="mvp-scope">MVP Scope</h2>
+<p><strong>Start with the highest-conflict pair from the case:</strong> Magic Apron + Inventory/Pricing</p>
+<h3 id="what-we-build-weeks-1-12">What We Build (Weeks 1-12)</h3>
+<ol>
+<li>Instrument Magic Apron to publish price/availability events</li>
+<li>Instrument Inventory system to publish ground truth (every 5 min)</li>
+<li>Build conflict detector for:</li>
+<li>Price mismatches &gt; 5%</li>
+<li>Inventory contradictions (chatbot says "in stock", system says 0)</li>
+<li>Dashboard showing conflict rate, examples, trends</li>
+<li>Slack alerts when conflicts spike</li>
+</ol>
+<h3 id="success-criteria-gono-go-for-expansion">Success Criteria (Go/No-Go for Expansion)</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Target</th>
+<th>Measurement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Events flowing</td>
+<td>&gt; 1M events/day from Magic Apron</td>
+<td>Pub/Sub metrics</td>
+</tr>
+<tr>
+<td>Conflict detection working</td>
+<td>Detect &gt; 95% of known test conflicts</td>
+<td>Synthetic tests</td>
+</tr>
+<tr>
+<td>False positive rate</td>
+<td>&lt; 10%</td>
+<td>Manual review of 100 alerts</td>
+</tr>
+<tr>
+<td>Mean time to detect</td>
+<td>&lt; 5 minutes</td>
+<td>Timestamp comparison</td>
+</tr>
+<tr>
+<td>Team adoption</td>
+<td>Both teams acknowledge alerts within 24h</td>
+<td>Alert response tracking</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Decision gate at Week 12:</strong> If targets met → expand to Recs/Search. If not → iterate on MVP.</p>
+<h2 id="implementation-roadmap">Implementation Roadmap</h2>
+<h3 id="phase-1-instrument-weeks-1-4">Phase 1: Instrument (Weeks 1-4)</h3>
+<ul>
+<li>Define event schema</li>
+<li>Magic Apron + Inventory publish to stream</li>
+<li>Basic conflict detection rules</li>
+</ul>
+<h3 id="phase-2-visibility-weeks-5-8">Phase 2: Visibility (Weeks 5-8)</h3>
+<ul>
+<li>Dashboard for cross-team visibility</li>
+<li>Alert system for threshold breaches</li>
+<li>Shared OKR tracking</li>
+</ul>
+<h3 id="phase-3-ai-analysis-weeks-9-12">Phase 3: AI Analysis (Weeks 9-12)</h3>
+<ul>
+<li>Batch processing for pattern detection</li>
+<li>Process mining on historical events</li>
+<li>Automated escalation for ambiguous conflicts</li>
+</ul>
+<h3 id="phase-4-expand-months-4-6">Phase 4: Expand (Months 4-6)</h3>
+<ul>
+<li>Add Recs/Search to event stream</li>
+<li>Add Sponsored Ads</li>
+<li>Refine conflict rules based on learnings</li>
+</ul>
+<h2 id="why-this-works">Why This Works</h2>
+<ol>
+<li><strong>Preserves autonomy</strong> — Teams keep their tech, data, decisions. Zero changes to existing systems.</li>
+<li><strong>Guardrails, not tollgates</strong> — Like Amazon's two-pizza teams: teams move fast with safety rails, not approval gates.</li>
+<li><strong>Non-threatening</strong> — Framing: "Turn the lights on so you can see what's breaking your metrics" not "you're doing it wrong."</li>
+<li><strong>Incremental</strong> — Start with one pair (Magic Apron + Inventory), prove value, then expand.</li>
+<li><strong>Cheap</strong> — $1.2M Year 1 is &lt; 0.001% of HD's revenue; proven at Walmart scale (11B events/day).</li>
+<li><strong>Measurable</strong> — Clear targets: &lt; 2% conflict rate, &lt; 5 min detection, &gt; 90% resolution within 24h.</li>
+<li><strong>Reversible</strong> — If it doesn't work after 90 days, turn it off with no residual impact.</li>
+</ol>
+<h2 id="governance-model">Governance Model</h2>
+<h3 id="who-owns-the-visibility-layer">Who Owns the Visibility Layer?</h3>
+<p><strong>New small team (3-5 engineers + 1 PM) reporting to Dave (VP Delivery)</strong></p>
+<p>Why Delivery?
+- Closest to ground truth (inventory, fulfillment, completion)
+- Already owns the "last mile" where collisions become visible
+- Neutral party — not competing for screen space or clicks
+- Dave explicitly understands the interface problem ("I get corrupted signals")</p>
+<h3 id="decision-authority-matrix">Decision Authority Matrix</h3>
+<table>
+<thead>
+<tr>
+<th>Conflict Type</th>
+<th>Detection</th>
+<th>First Responder</th>
+<th>Decision Authority</th>
+<th>Escalation (if unresolved 24h)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Price mismatch &gt; 5%</td>
+<td>Automated</td>
+<td>Pricing team</td>
+<td>VP Data Science</td>
+<td>Sam (EVP Digital)</td>
+</tr>
+<tr>
+<td>Inventory contradiction</td>
+<td>Automated</td>
+<td>Inventory + source team</td>
+<td>Dave (Delivery)</td>
+<td>Sam</td>
+</tr>
+<tr>
+<td>Screen space conflict</td>
+<td>Dashboard alert</td>
+<td>Page owner</td>
+<td>VP Online</td>
+<td>Sam</td>
+</tr>
+<tr>
+<td>Cross-team data collision</td>
+<td>AI pattern detection</td>
+<td>Both teams</td>
+<td>Joint decision</td>
+<td>Dave as tiebreaker</td>
+</tr>
+</tbody>
+</table>
+<h3 id="guardrails-not-tollgates">Guardrails, Not Tollgates</h3>
+<p><strong>Critical distinction for CEO buy-in:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Tollgate (We're NOT doing this)</th>
+<th>Guardrail (What we ARE doing)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Approval required before shipping</td>
+<td>Ship freely; get alerted after conflicts detected</td>
+</tr>
+<tr>
+<td>Central team decides what's right</td>
+<td>Teams decide; layer shows when they disagree</td>
+</tr>
+<tr>
+<td>Slows deployment velocity</td>
+<td>Zero impact on deploy speed</td>
+</tr>
+<tr>
+<td>Creates bottleneck</td>
+<td>Creates visibility</td>
+</tr>
+</tbody>
+</table>
+<p>The visibility layer <strong>never blocks</strong> a team from shipping. It only turns the lights on so teams can see when their work conflicts with others.</p>
+<h3 id="conflict-resolution-process">Conflict Resolution Process</h3>
+<pre><code>1. Conflict Detected
+   ↓
+2. Alert sent to both teams (Slack + Dashboard)
+   ↓
+3. Teams have 24 hours to:
+   a) Acknowledge and fix, OR
+   b) Acknowledge and document why it's acceptable, OR
+   c) Dispute the conflict detection (false positive)
+   ↓
+4. If unresolved after 24h → Auto-escalate to decision authority
+   ↓
+5. Decision authority has 48h to resolve
+   ↓
+6. If still unresolved → Escalate to Sam
+</code></pre>
+<h3 id="rollback-plan">Rollback Plan</h3>
+<p>If the visibility layer causes problems:</p>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Response</th>
+<th>Timeline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>False positive rate &gt; 20%</td>
+<td>Loosen detection thresholds</td>
+<td>1 day</td>
+</tr>
+<tr>
+<td>Teams overwhelmed by alerts</td>
+<td>Increase severity thresholds, reduce alert volume</td>
+<td>1 day</td>
+</tr>
+<tr>
+<td>Performance impact on source systems</td>
+<td>Reduce event frequency or make async</td>
+<td>1 week</td>
+</tr>
+<tr>
+<td>Fundamental approach not working</td>
+<td>Pause expansion, evaluate after 90 days</td>
+<td>90 days</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Abort criteria:</strong> If after 90 days the conflict rate hasn't improved AND teams report negative productivity impact, recommend discontinuation.</p>
+</main>
+
+<div class="footer">
+    Home Depot Case Study | UGA Terry College Case Competition 2026<br>
+    <small>Generated from <code>proposal.md</code></small>
+</div>
+
+<script>
+    function toggleSection(header) {
+        header.classList.toggle('active');
+        const content = header.nextElementSibling;
+        content.classList.toggle('active');
+    }
+
+    // Open all sections by default
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.section-header').forEach(function(header) {
+            header.classList.add('active');
+            header.nextElementSibling.classList.add('active');
+        });
+    });
+</script>
+
+</body>
+</html>
