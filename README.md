@@ -25,6 +25,8 @@ Hey MY QUEEN! If you're reading this, you're doing amazing. Seriously.
 
 This week is hard, but you've got this. Like fr, I know you can do this despite how have stuff has been recently.
 
+P.s. some of the little jokes here are me, some are AI. Sorry if some of it is like ... girl. But I think there is helpful content for sure. Let me know, you're going to love this!
+
 _Now close this and get back to crushing it_ ✨
 
 </details>
@@ -41,7 +43,7 @@ _Now close this and get back to crushing it_ ✨
    ```bash
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
    ```
-   > After installation, restart Terminal and run the two PATH commands it shows you.
+   > After installation, restart Terminal and [PLEASE ENSURE NOT TO MISS THIS IT IS IN THE OUTPUT] run the two PATH commands it shows you.
 
 ### Install AI Coding Tools
 
@@ -61,6 +63,8 @@ brew install gh
 | **Antigravity** | Google's AI-powered IDE with Gemini built-in |
 | **Cursor**      | AI-powered IDE with Claude/GPT integration   |
 | **GitHub CLI**  | Interact with GitHub from your terminal      |
+
+> 💡 **Pro tip:** In both Antigravity and Cursor, use **Claude Sonnet** or **Claude Opus** when possible — they tend to give the best results for coding tasks!
 
 ### Get Free Student Access
 
